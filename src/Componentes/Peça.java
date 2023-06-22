@@ -1,4 +1,4 @@
-/*
+/**
  * Criado por Rafael Masato Haga Costa em 22/06/2023
  */
 
@@ -6,11 +6,12 @@ package Componentes;
 
 abstract public class Peça {
     
-    int c_x;
-    int c_y;
-    Jogador jogador;
-    final char simbolo;
-    final int valor;
+    private int c_x;
+    private int c_y;
+    private Jogador jogador;
+    private final char simbolo;
+    private final int valor;
+    private boolean capturada;
 
     /**
      * Construtor da classe abstrata "Peça"
@@ -20,12 +21,13 @@ abstract public class Peça {
      * @param simbolo O construtor receberá um simbolo próprio da peça no construtor de sua subclasses
      * @param valor O construtor receberá o valor próprio da peça no contrutor de sua subclasee
      */
-    public Peça(int c_x, int c_y, Jogador jogador, char simbolo, int valor) {
+    public Peça(int c_x, int c_y, Jogador jogador, char simbolo, int valor, boolean capturada) {
         this.c_x = c_x;
         this.c_y = c_y;
         this.jogador = jogador;
         this.simbolo = simbolo;
         this.valor = valor;
+        this.capturada = capturada;
     }
 
     /**
@@ -82,6 +84,23 @@ abstract public class Peça {
      */
     public int getValor() {
         return this.valor;
+    }
+
+    /**
+     * @return "true" se a peça foi capturada e está no banco de peças de algum jogador,
+     * @return "false" se a peça está posicionada no tabuleiro
+     */
+    public boolean getCapturada() {
+        return this.capturada;
+    }
+
+    /**
+     * @param capturada Se refere ao estado da peça, 
+     * se "true", a peça foi capturada e está no banco de peças, 
+     * se "false", a peça até pode já ter sofrido uma captura, mas no posicionada no tabuleiro
+     */
+    public void setCapturada(boolean capturada) {
+        this.capturada = capturada;
     }
     
 }
