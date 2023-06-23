@@ -11,6 +11,15 @@ public enum ValorConj {
      *  }
      * }
      */
+    REI_JOIA(new Valor[] {
+        Valor.REI_JOIA,
+    }),
+    REI(new Valor[] {
+        Valor.REI,
+    }),
+    OURO(new Valor[] {
+        Valor.OURO,
+    }),
     PEAO(new Valor[] {
         Valor.PEAO_N,
         Valor.PEAO_P
@@ -46,7 +55,7 @@ public enum ValorConj {
     }
 
     /**
-     * @return 
+     * @return O par de valores associados a uma peça, um para cada estado
      */
     public Valor[] getValorConj() {
         return this.valores;

@@ -6,56 +6,46 @@ package Componentes;
 
 abstract public class Peça {
     
-    private int c_x;
-    private int c_y;
+    private Coordenada coordenada;
     private Jogador jogador;
-    private final char simbolo;
-    private final int valor;
+    private final Simbolo[] simbolo;
+    private final Valor[] valor;
     private boolean capturada;
+    private int promovida;
 
     /**
      * Construtor da classe abstrata "Peça"
-     * @param c_x Parâmetro que o construtor recebe como coordenada inicial em x
-     * @param c_y Parâmetro que o construtor recebe como coordenada inicial em y
-     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça começa o jogo
+     * @param coordenada Coordenadas da casa onde a peça está no momento
+     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça está no momento
      * @param simbolo O construtor receberá um simbolo próprio da peça no construtor de sua subclasses
      * @param valor O construtor receberá o valor próprio da peça no contrutor de sua subclasee
+     * @param capturada "true" se a peça foi capturada e está no banco de peças,
+     * "false" se a peça não foi capturada e está em jogo
+     *@param promovida assume "0" se a peça está em sua forma normal, e "1" se a peça está na sua forma promovida       
      */
-    public Peça(int c_x, int c_y, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        this.c_x = c_x;
-        this.c_y = c_y;
+    public Peça(Coordenada coordenada, Jogador jogador, Simbolo[] simbolo, Valor[] valor, boolean capturada, int promovida) {
+        this.coordenada = coordenada;
         this.jogador = jogador;
         this.simbolo = simbolo;
         this.valor = valor;
         this.capturada = capturada;
+        this.promovida = promovida;
+    }
+
+    // métodos de get e set
+
+    /**
+     * @return As coordenadas da peça no tabuleiro
+     */
+    public Coordenada getCoordenada() {
+        return this.coordenada;
     }
 
     /**
-     * @return A coordenada da peça em x
+     * @param coordenada Novas coordenadas para a peça no tabuleiro
      */
-    public int getC_x() {
-        return this.c_x;
-    }
-
-    /**
-     * @param c_x É atribuido a coordenada da peça em x
-     */
-    public void setC_x(int c_x) {
-        this.c_x = c_x;
-    }
-
-    /**
-     * @return A coordenada da peça em y
-     */
-    public int getC_y() {
-        return this.c_y;
-    }
-
-    /**
-     * @param c_y É atribuido a coordenada da peça em y
-     */
-    public void setC_y(int c_y) {
-        this.c_y = c_y;
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
     }
 
     /**
@@ -75,14 +65,14 @@ abstract public class Peça {
     /**
      * @return O kanji que representa a peça
      */
-    public char getSimbolo() {
+    public Simbolo[] getSimbolo() {
         return this.simbolo;
     }
 
     /**
      * @return O valor da peça segundo as regras do jogo
      */
-    public int getValor() {
+    public Valor[] getValor() {
         return this.valor;
     }
 
@@ -102,5 +92,35 @@ abstract public class Peça {
     public void setCapturada(boolean capturada) {
         this.capturada = capturada;
     }
+
+    /**
+     * @return "0" se a peça está promovia,
+     * "1" se a peça está promovida
+     */
+    public int getPromovida() {
+        return this.promovida;
+    }
+
+    /**
+     * @param promovida Altera a promoção da peça (pode ser 0 ou 1)
+     */
+    public void setPromovida(int promovida) {
+        //! verificar se promovida = 0 || 1
+        this.promovida = promovida;
+    }
+
     
+    
+    //demais métodos
+
+    /**
+     * A função andarPara é comum a todas as peças do jogo, no entanto possui uma implementação distinta para cada uma
+     * @param Pi Posição inicial da peça, coordenadas em que ela está antes do movimento acontecer
+     * @param Pf Posição final da peça, coordenadas em que ela estará após o movimento
+     * @return "true", caso o movimento seja possível
+     * @return "false", caso o movimento não seja possível 
+     */
+    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+        return true;
+    }
 }

@@ -4,7 +4,7 @@
 package Componentes;
 
 public class Torre {
-    Tuple t = new Tuple(1,2);
+    
     boolean promovida;
     
 }

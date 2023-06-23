@@ -11,6 +11,15 @@ public enum SimboloConj {
      *  }
      * }
      */
+    REI_JOIA(new Simbolo[] {
+        Simbolo.REI_JOIA
+    }),
+    REI(new Simbolo[] {
+        Simbolo.REI
+    }),
+    OURO(new Simbolo[] {
+        Simbolo.OURO
+    }),
     PEAO(new Simbolo[] {
         Simbolo.PEAO_N,
         Simbolo.PEAO_P
@@ -34,8 +43,7 @@ public enum SimboloConj {
     TORRE(new Simbolo[] {
         Simbolo.TORRE_N,
         Simbolo.TORRE_P
-    })
-    ;
+    });
 
     public final Simbolo[] simbolos;
 
