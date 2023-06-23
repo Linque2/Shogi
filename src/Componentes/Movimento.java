@@ -9,133 +9,141 @@ public enum Movimento {
      */
 
      //Peças normais
-    REI(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    REI(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     }),
-    REI_JOIA(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    REI_JOIA(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     }),
-    OURO(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.NO,
+    OURO(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
     }),
-    PEAO_N(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE
+    PEAO_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais()
     }),
-    LANCEIRO_N(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
+    LANCEIRO_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
     }),
-    CAVALO_N(new SentidosFundamentais[] {
-        SentidosFundamentais.L_NE,
-        SentidosFundamentais.L_NO
+    CAVALO_N(new Coordenada[] {
+        SentidosFundamentais.L_NE.getSentidosFundamentais(),
+        SentidosFundamentais.L_NO.getSentidosFundamentais()
     }),
-    PRATA_N(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    PRATA_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     }),
-    BISPO_N(new SentidosFundamentais[] {
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    BISPO_N(new Coordenada[] {
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     }),
-    TORRE_N(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
+    TORRE_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais()
     }),
     //Peças promovidas
-    PEAO_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.NO,
+    PEAO_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
     }),
-    LANCEIRO_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.NO,
+    LANCEIRO_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
     }),
-    CAVALO_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.NO,
+    CAVALO_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
     }),
-    PRATA_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.NO,
+    PRATA_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
     }),
-    BISPO_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    BISPO_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     }),
-    TORRE_P(new SentidosFundamentais[] {
-        SentidosFundamentais.NORTE,
-        SentidosFundamentais.SUL,
-        SentidosFundamentais.LESTE,
-        SentidosFundamentais.OESTE,
-        SentidosFundamentais.NE,
-        SentidosFundamentais.SE,
-        SentidosFundamentais.NO,
-        SentidosFundamentais.SO
+    TORRE_P(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
     });
 
 
-    private final ArrayList<SentidosFundamentais> movimentos;
+    private final ArrayList<Coordenada> movimentos;
 
     /**
      * @param sentidos lista de vetores unitarios associados ao movimento de uma peça
      */
-    Movimento(SentidosFundamentais[] sentidos) {
-        List<SentidosFundamentais> lista = Arrays.asList(sentidos);
-        ArrayList<SentidosFundamentais> movimentos = new ArrayList<SentidosFundamentais>(lista); // Transforma o SentidosFundamentais[] em ArrayList<SentidosFundamentais>
+    Movimento(Coordenada[] sentidos) {
+        List<Coordenada> lista = Arrays.asList(sentidos);
+        ArrayList<Coordenada> movimentos = new ArrayList<Coordenada>(lista); // Transforma o Coordenada[] em ArrayList<Coordenada>
         this.movimentos = movimentos;
     }
 
     /**
      * @return Vetores unitários para o deslocamento de cada peça
      */
-    public ArrayList<SentidosFundamentais> getMovimentos() {
+    public ArrayList<Coordenada> getMovimentos() {
         return this.movimentos;
+    }
+
+    @Override
+    public String toString() {
+        String saida = "";
+        for (Coordenada coordenada : getMovimentos())
+            saida += coordenada.toString();
+        return saida;
     }
 }

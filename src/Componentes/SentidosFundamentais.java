@@ -21,4 +21,8 @@ public enum SentidosFundamentais {
     SentidosFundamentais(Coordenada vetor) {
         this.vetor = vetor;
     }
+
+    public Coordenada getSentidosFundamentais() {
+        return vetor;        
+    }
 }

@@ -1,5 +1,7 @@
 package Componentes;
 
+import java.util.*;
+
 public class Coordenada {
     private int c_x;
     private int c_y;
@@ -55,5 +57,26 @@ public class Coordenada {
         int v_y = Pf.getC_y() - Pi.getC_y();
         Coordenada vetor = new Coordenada(v_x, v_y);
         return vetor;
+    }
+
+    public static Coordenada transladarCoordenada(Coordenada coordIni, Coordenada vetor) {
+        int tc_x = coordIni.c_x + vetor.c_x;
+        int tc_y = coordIni.c_y + vetor.c_y;
+        Coordenada t_coordenada = new Coordenada(tc_x, tc_y);
+        return t_coordenada;
+    }
+
+    public boolean estaNaLista(ArrayList<Coordenada> listaCoord) {
+        for (Coordenada coordenada : listaCoord) {
+            if (coordenada.getC_x() == getC_x() && coordenada.getC_y() == getC_y())
+                return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        String saida = "(" + getC_x() + "," + getC_y() + ")";
+        return saida;
     }
 }

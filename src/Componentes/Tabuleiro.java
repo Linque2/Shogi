@@ -51,6 +51,9 @@ public class Tabuleiro {
 
     public void destacarPossiveisJogadas() {}
 
+    /**
+     * Função para testes
+     */
     public static void main(String[] args) {
     }
 }

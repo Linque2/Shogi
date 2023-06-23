@@ -63,7 +63,7 @@ public enum MovimentoConj {
      /**
       * @return Retorna uma lista com dois elementos, o primeiro guarda todos os movimentos para a forma não promovida da peça, o segundo para a forma promovida
       */
-     public ArrayList<Movimento> getMovimentos() {
-         return this.movimentos;
+     public ArrayList<Movimento> getMovimentos() { 
+        return this.movimentos;
      }
 }
