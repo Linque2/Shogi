@@ -14,8 +14,8 @@ public class Lanceiro extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Lanceiro(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, Simbolo simbolo,Valor[] valores, Valor valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false);
+    public Lanceiro(int x, int y, Jogador jogador, Simbolo[] simbolos, Simbolo simbolo,Valor[] valores, Valor valor, boolean capturada) {
+        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false);
     }
 
     // métodos de get e set

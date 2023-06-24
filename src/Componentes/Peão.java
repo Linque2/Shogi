@@ -6,8 +6,8 @@ package Componentes;
 
 public class Peão extends Peça{
 
-    public Peão(Coordenada coordenada, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false);
+    public Peão(int x, int y, Jogador jogador, char simbolo, int valor, boolean capturada) {
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false);
     }
 
     // métodos de get e set
