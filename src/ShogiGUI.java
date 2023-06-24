@@ -2,6 +2,7 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import Componentes.Tabuleiro;
 
 
 public class ShogiGUI {
