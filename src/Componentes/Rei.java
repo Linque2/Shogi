@@ -6,16 +6,42 @@ package Componentes;
 
 public class Rei extends Peça{
     
-    /**
-     * Construtor da classe "Rei"
-     * @param c_x Parâmetro que o construtor recebe como coordenada inicial em x
-     * @param c_y Parâmetro que o construtor recebe como coordenada inicial em y
-     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça começa o jogo
-     * @param simbolo O construtor receberá um simbolo próprio da peça no construtor de sua subclasses
-     * @param valor O construtor receberá o valor próprio da peça no contrutor de sua subclasee
+     /**
+     * Construtor da classe Rei que herda de "Peça"
+     * @param coordenada Coordenadas da casa onde a peça está no momento
+     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça está no momento
+     * @param simbolo Kanji representativo do Rei
+     * @param valor Valor do Rei segundo as regras do jogo
+     * @param capturada "true" se a peça foi capturada e está no banco de peças,
+     * "false" se a peça não foi capturada e está em jogo
      */
-    public Rei(int c_x, int c_y, Jogador jogador){
-        super(c_x, c_y, jogador, Simbolo.REI.getSimbolo(), Valor.REI.getValor(), false);
+    public Rei(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
+        super(coordenada, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI, ValorConj.REI.getValorConj(),Valor.REI, capturada, false);
+    }
+
+    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+        Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
+        if (vetor.estaNaLista(Movimento.REI.getMovimentos())) {
+            setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
+            return true;
+        } else
+            return false;
+    }
+
+    @Override
+    /**
+     * @return O método retorna sempre "false", pois o Rei não possui promoção
+     */
+    public boolean promoverPeça() {
+        return false;
+    }
+
+    @Override
+    /**
+     * @return O método retorna sempre "false", pois como o Rei não pode ser promovido, ele também não pode ser despromovido
+     */
+    public boolean despromoverPeça() {
+        return false;
     }
 
 }

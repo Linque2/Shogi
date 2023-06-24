@@ -4,58 +4,56 @@
 
 package Componentes;
 
+import javax.lang.model.util.ElementScanner6;
+
 abstract public class Peça {
     
-    private int c_x;
-    private int c_y;
+    private Coordenada coordenada;
     private Jogador jogador;
-    private final char simbolo;
-    private final int valor;
+    private final Simbolo[] simbolos; // Par de ideogramas gravados na peça
+    private char simblo; // Ideograma do estado atual da peça
+    private final Valor[] valores; //Par de valores correspondentes a cada peça
+    private int valor;// Valor do estado atual da peça
     private boolean capturada;
+    private boolean promovida;
 
     /**
      * Construtor da classe abstrata "Peça"
-     * @param c_x Parâmetro que o construtor recebe como coordenada inicial em x
-     * @param c_y Parâmetro que o construtor recebe como coordenada inicial em y
-     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça começa o jogo
+     * @param coordenada Coordenadas da casa onde a peça está no momento
+     * @param jogador Parâmetro que o construtor recebe como o jogador com que a peça está no momento
+     * @param simbolos Lista de ideogramas possíveis associados aos estados da peça, [0] para peça despromovida e [1] para a promovida
      * @param simbolo O construtor receberá um simbolo próprio da peça no construtor de sua subclasses
+     * @param valores Lista de valores possíveis associados aos estados da peça, [0] para peça despromovida e [1] para a promovida 
      * @param valor O construtor receberá o valor próprio da peça no contrutor de sua subclasee
+     * @param capturada "true" se a peça foi capturada e está no banco de peças,
+     * "false" se a peça não foi capturada e está em jogo
+     *@param promovida assume "0" se a peça está em sua forma normal, e "1" se a peça está na sua forma promovida       
      */
-    public Peça(int c_x, int c_y, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        this.c_x = c_x;
-        this.c_y = c_y;
+    public Peça(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, boolean promovida) {
+        this.coordenada = coordenada;
         this.jogador = jogador;
+        this.simbolos = simbolos;
         this.simbolo = simbolo;
+        this.valores = valores;
         this.valor = valor;
         this.capturada = capturada;
+        this.promovida = promovida;
+    }
+
+    // métodos de get e set
+
+    /**
+     * @return As coordenadas da peça no tabuleiro
+     */
+    public Coordenada getCoordenada() {
+        return this.coordenada;
     }
 
     /**
-     * @return A coordenada da peça em x
+     * @param coordenada Novas coordenadas para a peça no tabuleiro
      */
-    public int getC_x() {
-        return this.c_x;
-    }
-
-    /**
-     * @param c_x É atribuido a coordenada da peça em x
-     */
-    public void setC_x(int c_x) {
-        this.c_x = c_x;
-    }
-
-    /**
-     * @return A coordenada da peça em y
-     */
-    public int getC_y() {
-        return this.c_y;
-    }
-
-    /**
-     * @param c_y É atribuido a coordenada da peça em y
-     */
-    public void setC_y(int c_y) {
-        this.c_y = c_y;
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
     }
 
     /**
@@ -73,17 +71,45 @@ abstract public class Peça {
     }
 
     /**
-     * @return O kanji que representa a peça
+     * @return Lista de ideogramas associados a peça, segundo seus possíveis estados
      */
-    public char getSimbolo() {
+    public Simbolo[] getSimbolos() {
         return this.simbolo;
     }
 
     /**
-     * @return O valor da peça segundo as regras do jogo
+     * @return Simbolo atual da peça
+     */
+    public char getSimblo() {
+        return this.simblo;
+    }
+
+    /**
+     * @param simblo Simbolo que desejamos atribuir a peça, segundo seu estado atual
+     */
+    public void setSimblo(char simblo) {
+        this.simblo = simblo;
+    }
+
+    /**
+     * @return Lista de valores associados a peça, segundo seus possíveis estados
+     */
+    public Valor[] getValores() {
+        return this.valor;
+    }
+
+    /**
+     * @return Valor atual da peça
      */
     public int getValor() {
         return this.valor;
+    }
+
+    /**
+     * @param valor Valor que desejamos atribuir a peça, segundo seu estado atual
+     */
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     /**
@@ -102,5 +128,65 @@ abstract public class Peça {
     public void setCapturada(boolean capturada) {
         this.capturada = capturada;
     }
+
+    /**
+     * @return "0" se a peça está promovia,
+     * "1" se a peça está promovida
+     */
+    public boolean getPromovida() {
+        return this.promovida;
+    }
+
+    /**
+     * @param promovida Altera a promoção da peça (pode ser 0 ou 1)
+     */
+    public void setPromovida(boolean promovida) {
+        //! verificar se promovida = 0 || 1
+        this.promovida = promovida;
+    }
+
     
+    
+    //demais métodos
+
+    /**
+     * A função andarPara é comum a todas as peças do jogo, no entanto possui uma implementação distinta para cada uma
+     * @param Pi Posição inicial da peça, coordenadas em que ela está antes do movimento acontecer
+     * @param Pf Posição final da peça, coordenadas em que ela estará após o movimento
+     * @return "true", caso o movimento seja possível
+     * @return "false", caso o movimento não seja possível 
+     */
+    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+        return true;
+    }
+
+    /**
+     * Função que atualiza a peça para sua forma promovida
+     * @return "true" se a peça foi promovida
+     * @return "false" se a peça não foi promovida
+     */
+    public boolean promoverPeça() {
+        if (getPromovida() == false) {
+            setPromovida(true);
+            setSimblo(getSimbolos()[1]);
+            setValor(getValores()[1]);
+            return true;
+        } else 
+            return false;
+    }
+
+    /**
+     * Função que atualiza a peça para sua forma não promovida
+     * @return "true" se ela foi despromovida
+     * @return "false" se ela não foi despromovida
+     */
+    public boolean despromoverPeça() {
+        if (getPromovida() == true) {
+            setPromovida(false);
+            setSimblo(getSimbolos()[0]);
+            setValor(getValores()[0]);
+            return true;
+        } else 
+            return false;
+    }
 }

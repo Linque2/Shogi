@@ -6,8 +6,14 @@ package Componentes;
 
 public enum Valor {
     /**
-     * Peças comuns
+     * Valores para cada peça do jogo
+     * Observe que a maioria da peças possui dois estados, 
+     * o normal, que possui um valor, e um promovido, que possui outro
+     * Como temos essa dualidade em algumas peças, foi creiado uma classe enum ValorConj,
+     * que guarda os pares de valores que cada peça pode possuir, considerando seus dois estados
+     * As excessões a regra são os Reis e o Ouro, que possuem um único estado, logo um único valor
      */
+    //Peças normais
     REI_JOIA(-1),   //Em um jogo real o rei não possui valor, pois não pode ser capturado
     REI(-1),        //
     OURO(5),
@@ -17,9 +23,7 @@ public enum Valor {
     PRATA_N(5),
     BISPO_N(8),
     TORRE_N(9),
-    /**
-     *Peças promovidas
-     */
+    //Peças promovidas
     PEAO_P(7),
     LANCEIRO_P(6),
     CAVALO_P(6),
