@@ -1,6 +1,8 @@
+import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 
 public class ShogiGUI {
     private static final int ROWS = 9;
@@ -34,7 +36,7 @@ public class ShogiGUI {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 JPanel cellPanel = new JPanel(new BorderLayout());
-                cellPanel.setBackground(LIGHT_COLOR);
+                cellPanel.setBackground(LIGHT_COLOR);//Adicionar cor ao tabuleiro
                 cellPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR)); // Adiciona contorno preto
                 cellPanel.addMouseListener(new CellClickListener(row, col));
                 cellPanels[row][col] = cellPanel;
@@ -42,9 +44,21 @@ public class ShogiGUI {
             }
         }
 
-        // Adicione peças ao tabuleiro (exemplo)
-        board[0][0] = new Piece("Rook");
-        board[0][1] = new Piece("Rook");
+        // Como as peças devem ser adicionadas:
+        /*board[0][0] = new Lanceiro(null, null, null, null, null, null, false);
+        board[0][1] = new Cavalo(null, null, null, 0, null, COLS, false);
+        board[0][4] = new Rei(null, null, null, 0, null, COLS, false);
+        board[0][7] = new Cavalo(null, null, null, 0, null, COLS, false);
+        board[0][8] = new Lanceiro(null, null, null, null, null, null, false);
+        board[1][1] = new Torre(null, null, null, 0, null, COLS, false);
+        board[1][7] = new Torre(null, null, null, 0, null, COLS, false);
+        for (int coluna=0; coluna<9; coluna++){
+            board[2][coluna] = new Peão(null, null, 0, coluna, false);
+        }*/
+       
+        // Exemplo visual
+        board[2][4] = new Piece("Images/lanca.png");
+        
 
         updateBoardUI();
     }
@@ -58,19 +72,22 @@ public class ShogiGUI {
 
                 Piece piece = board[row][col];
                 if (piece != null) {
-                    JLabel pieceLabel = new JLabel(piece.getName());
+                    //Seta a imagem da peça
+                    JLabel pieceLabel = new JLabel(piece.getImageIcon());
                     pieceLabel.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(pieceLabel, BorderLayout.CENTER);
                 }
 
-                if (row == 0 && col != 0) {
-                    JLabel label = new JLabel(String.valueOf(col+1));
+                if (row == 0 && col != 8) {
+                    //Realiza a numeração do tabuleiro
+                    JLabel label = new JLabel(String.valueOf(COLS - col));
                     label.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(label, BorderLayout.NORTH);
                 }
 
-                if (row != 0 && col == 0) {
-                    JLabel label = new JLabel(String.valueOf(row+1));
+                if (row != 0 && col == 8) {
+                    //Realiza a numeração do tabuleiro
+                    JLabel label = new JLabel(String.valueOf(row + 1));
                     label.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(label, BorderLayout.NORTH);
                 }
@@ -80,7 +97,7 @@ public class ShogiGUI {
                 cellPanel.repaint();
             }
         }
-        JPanel cellPanel = cellPanels[0][0];
+        JPanel cellPanel = cellPanels[0][8];
         JLabel jLabel = new JLabel(String.valueOf(1));
         jLabel.setHorizontalAlignment(SwingConstants.CENTER);
         cellPanel.add(jLabel, BorderLayout.NORTH);
@@ -90,6 +107,7 @@ public class ShogiGUI {
     }
 
     private class CellClickListener extends MouseAdapter {
+        //Classe para definir a lógica quando o usuário clica nas peças e tenta realizar uma ação
         private int row;
         private int col;
 
@@ -124,21 +142,27 @@ public class ShogiGUI {
         }
 
         private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
-            // Lógica para verificar se a jogada é válida (de acordo com as regras do Shogi)
-            // Implemente sua lógica de validação de movimento aqui
+            // Lógica para verificar se a jogada é válida 
             return true; // Temporariamente, retorna true para permitir qualquer movimento
         }
     }
 
     private class Piece {
-        private String name;
+        // Classe exemplo
+        private ImageIcon imageIcon;
 
-        public Piece(String name) {
-            this.name = name;
+        public Piece(String imagePath) {
+            this.imageIcon = new ImageIcon(imagePath);
         }
-
-        public String getName() {
-            return name;
+        public ImageIcon getImageIcon() {
+            return imageIcon;
         }
+     
     }
+
+    public static void main(String[] args) {
+    //chama a interface
+    SwingUtilities.invokeLater(ShogiGUI::new);
+}
+
 }
