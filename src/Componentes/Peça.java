@@ -11,7 +11,7 @@ abstract public class Peça {
     private Coordenada coordenada;
     private Jogador jogador;
     private final Simbolo[] simbolos; // Par de ideogramas gravados na peça
-    private char simblo; // Ideograma do estado atual da peça
+    private char simbolo; // Ideograma do estado atual da peça
     private final Valor[] valores; //Par de valores correspondentes a cada peça
     private int valor;// Valor do estado atual da peça
     private boolean capturada;
@@ -74,28 +74,28 @@ abstract public class Peça {
      * @return Lista de ideogramas associados a peça, segundo seus possíveis estados
      */
     public Simbolo[] getSimbolos() {
-        return this.simbolo;
+        return this.simbolos;
     }
 
     /**
      * @return Simbolo atual da peça
      */
-    public char getSimblo() {
-        return this.simblo;
+    public char getSimbolo() {
+        return this.simbolo;
     }
 
     /**
      * @param simblo Simbolo que desejamos atribuir a peça, segundo seu estado atual
      */
-    public void setSimblo(char simblo) {
-        this.simblo = simblo;
+    public void setSimbolo(char simblo) {
+        this.simbolo = simblo;
     }
 
     /**
      * @return Lista de valores associados a peça, segundo seus possíveis estados
      */
     public Valor[] getValores() {
-        return this.valor;
+        return this.valores;
     }
 
     /**
@@ -168,8 +168,8 @@ abstract public class Peça {
     public boolean promoverPeça() {
         if (getPromovida() == false) {
             setPromovida(true);
-            setSimblo(getSimbolos()[1]);
-            setValor(getValores()[1]);
+            setSimbolo(getSimbolos()[1].getSimbolo());
+            setValor(getValores()[1].getValor());
             return true;
         } else 
             return false;
@@ -183,8 +183,8 @@ abstract public class Peça {
     public boolean despromoverPeça() {
         if (getPromovida() == true) {
             setPromovida(false);
-            setSimblo(getSimbolos()[0]);
-            setValor(getValores()[0]);
+            setSimbolo(getSimbolos()[0].getSimbolo());
+            setValor(getValores()[0].getValor());
             return true;
         } else 
             return false;

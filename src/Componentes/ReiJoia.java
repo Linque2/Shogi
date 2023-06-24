@@ -15,7 +15,7 @@ public class ReiJoia extends Peça{
      * "false" se a peça não foi capturada e está em jogo
      */
     public ReiJoia(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA, ValorConj.REI_JOIA.getValorConj(),Valor.REI_JOIA, capturada, false);
+        super(coordenada, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false);
     }
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {

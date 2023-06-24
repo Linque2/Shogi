@@ -16,7 +16,7 @@ public class Rei extends Peça{
      * "false" se a peça não foi capturada e está em jogo
      */
     public Rei(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI, ValorConj.REI.getValorConj(),Valor.REI, capturada, false);
+        super(coordenada, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI.getSimbolo(), ValorConj.REI.getValorConj(),Valor.REI.getValor(), capturada, false);
     }
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
