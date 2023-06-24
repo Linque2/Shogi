@@ -6,15 +6,8 @@ package Componentes;
 
 public class Peão extends Peça{
 
-    /**
-     * @param coordenada
-     * @param jogador
-     * @param simbolo
-     * @param valor
-     * @param capturada
-     */
     public Peão(Coordenada coordenada, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.PEAO.getSimboloConj(), ValorConj.PEAO.getValorConj(), capturada, 0);
+        super(coordenada, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N, ValorConj.PEAO.getValorConj(),Valor.PEAO_N, capturada, false);
     }
 
     // métodos de get e set
@@ -24,11 +17,20 @@ public class Peão extends Peça{
      */
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        if (vetor.estaNaLista(MovimentoConj.PEAO.getMovimentos().get(getPromovida()).getMovimentos())) {
-            setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
-            return true;
-        } else
-            return false;
+        switch(getPromovida()) {
+            case false:
+                if (vetor.estaNaLista(Movimento.PEAO_N.getMovimentos())) {
+                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
+                    return true;
+                } else
+                    return false;
+            case true:
+                if (vetor.estaNaLista(Movimento.PEAO_P.getMovimentos())) {
+                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
+                    return true;
+                } else
+                    return false;
+        }
     }
 
 }

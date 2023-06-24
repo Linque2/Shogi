@@ -3,7 +3,7 @@
  */
 package Componentes;
 
-public class Ouro extends Peça{
+public class Ouro extends Peça {
 
      /**
      * Construtor da classe Ouro que herda de "Peça"
@@ -14,8 +14,8 @@ public class Ouro extends Peça{
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Ouro(Coordenada coordenada, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.OURO.getSimboloConj(), ValorConj.OURO.getValorConj(), capturada, 0);
+    public Ouro(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
+        super(coordenada, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO, ValorConj.OURO.getValorConj(),Valor.OURO, capturada, false);
     }
 
     // métodos de get e set
@@ -28,12 +28,30 @@ public class Ouro extends Peça{
      */
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        if (vetor.estaNaLista(MovimentoConj.OURO.getMovimentos().get(getPromovida()).getMovimentos())) {
+        if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
             return true;
         } else
             return false;
     }
+
+    @Override
+    /**
+     * @return O método retorna sempre "false", pois o ouro não possui promoção
+     */
+    public boolean promoverPeça() {
+        return false;
+    }
+
+    @Override
+    /**
+     * @return O método retorna sempre "false", pois como o ouro não pode ser promovido, ele também não pode ser despromovido
+     */
+    public boolean despromoverPeça() {
+        return false;
+    }
+
+
 
     /**
      * Função para testes
@@ -42,8 +60,8 @@ public class Ouro extends Peça{
     public static void main(String[] args) {
         Coordenada vetor = new Coordenada(0, 1);
         System.out.println(vetor);
-        System.out.println(MovimentoConj.OURO.getMovimentos().get(0));
-        if (vetor.estaNaLista(MovimentoConj.OURO.getMovimentos().get(0).getMovimentos())) 
+        System.out.println(Movimento.OURO.getMovimentos());
+        if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) 
             System.out.println("TRUE!");
         else
             System.out.println("FALSE!");

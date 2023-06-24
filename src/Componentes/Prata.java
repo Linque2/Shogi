@@ -6,16 +6,25 @@ package Componentes;
 
 public class Prata extends Peça {
 
-    public Prata(Coordenada coordenada, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.PRATA.getSimboloConj(), ValorConj.PRATA.getValorConj(), capturada, 0);
+    public Prata(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
+        super(coordenada, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false);
     };
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        if (vetor.estaNaLista(MovimentoConj.PRATA.getMovimentos().get(getPromovida()).getMovimentos())) {
-            setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
-            return true;
-        } else
-            return false;
+        switch(getPromovida()){
+            case false: 
+                if (vetor.contemVetorParalelo(Movimento.PRATA_N.getMovimentos())) {
+                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
+                    return true;
+                } else
+                    return false;
+            case true: 
+                if (vetor.estaNaLista(Movimento.PRATA_P.getMovimentos())) {
+                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
+                    return true;
+                } else
+                    return false;
+        }
     }
 }
