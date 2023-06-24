@@ -15,7 +15,7 @@ public class Lanceiro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Lanceiro(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, Simbolo simbolo,Valor[] valores, Valor valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getSimbolo(), capturada, false);
+        super(coordenada, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false);
     }
 
     // métodos de get e set
@@ -28,14 +28,20 @@ public class Lanceiro extends Peça {
      */
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        switch(getPromovida()){
-            case false: // O quando a peçça não está  promovida
+        int estaPromovida;
+        if (getPromovida() == true)
+            estaPromovida = 1;
+        else
+            estaPromovida = 0;
+            
+        switch(estaPromovida){
+            case 0: // O quando a peçça não está  promovida
                 if (vetor.contemVetorParalelo(Movimento.LANCEIRO_N.getMovimentos())) {
                     setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
                     return true;
                 } else
                     return false;
-            case true: // 1 quando a peça está promovida
+            case 1: // 1 quando a peça está promovida
                 if (vetor.estaNaLista(Movimento.LANCEIRO_P.getMovimentos())) {
                     setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
                     return true;

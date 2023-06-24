@@ -20,14 +20,20 @@ public class Bispo extends Peça {
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        switch(getPromovida()){
-            case true: // 1 quando a peça está promovida
+        int estaPromovida;
+        if (getPromovida() == true)
+            estaPromovida = 1;
+        else
+            estaPromovida = 0;
+            
+        switch(estaPromovida){
+            case 0: // 1 quando a peça está promovida
                 if (vetor.estaNaLista(Movimento.BISPO_P.getMovimentos())) {
                     setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
                     return true;
                 } else
                     return false;
-            case false: // O quando a peça não está  promovida
+            case 1: // O quando a peça não está  promovida
                 if (vetor.contemVetorParalelo(Movimento.BISPO_N.getMovimentos())) {
                     setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
                     return true;

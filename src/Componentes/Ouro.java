@@ -15,7 +15,7 @@ public class Ouro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Ouro(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO, ValorConj.OURO.getValorConj(),Valor.OURO, capturada, false);
+        super(coordenada, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false);
     }
 
     // métodos de get e set
