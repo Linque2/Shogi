@@ -1,4 +1,3 @@
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,13 +6,15 @@ import Componentes.*;
 public class ShogiGUI {
     private static final int ROWS = 9;
     private static final int COLS = 9;
+    private static final int BANK_SIZE = 10;
     private static final Color LIGHT_COLOR = new Color(222, 184, 135); // Bege
     private static final Color BORDER_COLOR = Color.BLACK;
 
     private JFrame frame;
     private JPanel boardPanel;
     private JPanel[][] cellPanels;
-    //private Piece[][] board;
+    private JPanel painelBanco;
+    private JScrollPane painelBancoScroll;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
@@ -26,8 +27,12 @@ public class ShogiGUI {
         tabuleiro.setGrid(new Peça[ROWS][COLS]);
 
         initializeBoard(tabuleiro);
+        initializePainelBanco(tabuleiro);
 
-        frame.add(boardPanel);
+        frame.setLayout(new BorderLayout());
+        frame.add(boardPanel, BorderLayout.CENTER);
+        frame.add(painelBancoScroll, BorderLayout.EAST);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -39,7 +44,7 @@ public class ShogiGUI {
                 JPanel cellPanel = new JPanel(new BorderLayout());
                 cellPanel.setBackground(LIGHT_COLOR);//Adicionar cor ao tabuleiro
                 cellPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR)); // Adiciona contorno preto
-                cellPanel.addMouseListener(new CellClickListener(row, col));
+                cellPanel.addMouseListener(new CellClickListener(row, col, tabuleiro));
                 cellPanels[row][col] = cellPanel;
                 boardPanel.add(cellPanel);
             }
@@ -63,6 +68,18 @@ public class ShogiGUI {
             
 
         updateBoardUI(tabuleiro);
+    }
+
+    private void initializePainelBanco(Tabuleiro tabuleiro) {
+        painelBanco = new JPanel(new GridLayout(BANK_SIZE, 1));
+        painelBancoScroll = new JScrollPane(painelBanco);
+        painelBancoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        painelBancoScroll.setPreferredSize(new Dimension(200, frame.getHeight()));
+
+        //exemplo de uma peça no banco
+        Cavalo cavalo = new Cavalo(-1, -1, null, null, Simbolo.CAVALO_N.getSimbolo(), null, BANK_SIZE, false);
+        JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
+        painelBanco.add(pieceLabel);
     }
 
     private void updateBoardUI(Tabuleiro tabuleiro) {
@@ -112,14 +129,16 @@ public class ShogiGUI {
         //Classe para definir a lógica quando o usuário clica nas peças e tenta realizar uma ação
         private int row;
         private int col;
+        private Tabuleiro tabuleiro;
 
-        public CellClickListener(int row, int col) {
+        public CellClickListener(int row, int col, Tabuleiro tabuleiro) {
             this.row = row;
             this.col = col;
+            this.tabuleiro = tabuleiro;
         }
 
-        
-        public void mouseClicked(MouseEvent e, Tabuleiro tabuleiro) {
+        @Override
+        public void mouseClicked(MouseEvent event) {
             if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if (tabuleiro.getGrid()[row][col] != null) {
