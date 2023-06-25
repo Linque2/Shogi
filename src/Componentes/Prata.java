@@ -48,18 +48,22 @@ public class Prata extends Peça {
         switch(estaPromovida){
             case 0: 
                 for (Coordenada coordenada : Movimento.PRATA_N.getMovimentos()) {
-                    if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
-                        jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+                Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+                    if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                        if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
+                            jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
                 }
 
                 return jogadasPossíveis;
             case 1: 
                 for (Coordenada coordenada : Movimento.PRATA_P.getMovimentos()) {
-                    if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
-                        jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
-                    }
+                Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+                    if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                        if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
+                            jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
 
                 return jogadasPossíveis;
+                }
         }
         return null;
     }

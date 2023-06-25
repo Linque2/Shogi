@@ -75,6 +75,23 @@ public class Tabuleiro implements Serializable {
     }
 
     /**
+     * @param vetor vetor que indica em que região ocorrerá a busca da peça
+     * @param Pi ponto inicial de onde começará a busca
+     * @return A primeira peça encontrada nesta região 
+     */
+    public Peça buscaPeça(Coordenada vetor, Coordenada Pi) {
+        Peça peça = null;
+        Coordenada Pf = Pi;
+        while ((peça == null) && estaNoTabuleiro(Pf)) {
+            Pf = Coordenada.transladarCoordenada(Pf, vetor);
+            if (estaNoTabuleiro(Pf) && (getGrid()[Pf.getC_x()][Pf.getC_y()] != null))
+                return getGrid()[Pf.getC_x()][Pf.getC_y()];
+        }
+        return null;
+    }
+
+
+    /**
      * Função para testes
      */
     public static void main(String[] args) {
