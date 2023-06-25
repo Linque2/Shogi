@@ -21,6 +21,7 @@ abstract public class Peça implements Serializable {
     private boolean capturada;
     private boolean promovida;
     private ArrayList<ImageIcon> ListImageIcon;
+    private Tabuleiro tabuleiro;
 
     /**
      * Construtor da classe abstrata "Peça"
@@ -34,7 +35,7 @@ abstract public class Peça implements Serializable {
      * "false" se a peça não foi capturada e está em jogo
      *@param promovida assume "0" se a peça está em sua forma normal, e "1" se a peça está na sua forma promovida       
      */
-    public Peça(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, boolean promovida, String imageString_N, String imageString_P) {
+    public Peça(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, boolean promovida, String imageString_N, String imageString_P, Tabuleiro  tabuleiro) {
         
         this.coordenada = new Coordenada(x, y);
         this.jogador = jogador;
@@ -49,6 +50,7 @@ abstract public class Peça implements Serializable {
         ImageIcon image2 = new ImageIcon(imageString_P);
         this.ListImageIcon.add(image1);
         this.ListImageIcon.add(image2);
+        this.tabuleiro = tabuleiro;
     }
 
     // métodos de get e set
@@ -151,6 +153,10 @@ abstract public class Peça implements Serializable {
         return this.promovida;
     }
 
+    public Tabuleiro getTabuleiro() {
+        return this.tabuleiro;
+    }
+
     /**
      * @param promovida Altera a promoção da peça (pode ser 0 ou 1)
      */
@@ -170,7 +176,7 @@ abstract public class Peça implements Serializable {
      * @return "true", caso o movimento seja possível
      * @return "false", caso o movimento não seja possível 
      */
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         return true;
     }
 
@@ -202,5 +208,9 @@ abstract public class Peça implements Serializable {
             return true;
         } else 
             return false;
+    }
+
+    public ArrayList<Coordenada> podeAndar() {
+        return null;
     }
 }
