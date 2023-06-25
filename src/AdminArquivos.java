@@ -11,7 +11,6 @@ public abstract class AdminArquivos {
 	// Escrita
 	public static boolean salvarTabuleiro(Tabuleiro tabuleiro) {
 		String nomeArquivo = nomeArquivoTabuleiro(tabuleiro);
-//		System.out.println("nomeArquivo = " + nomeArquivo);
 		
 		if (nomeArquivo.equals(""))
 			return escreverTabuleiro(tabuleiro, nomeNovoArquivoTabuleiro());
@@ -25,6 +24,7 @@ public abstract class AdminArquivos {
         	ObjectOutputStream objetoSaida = new ObjectOutputStream(new FileOutputStream(nomeArquivo));
             objetoSaida.writeObject(tabuleiro);
             objetoSaida.flush();
+            objetoSaida.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,6 +38,7 @@ public abstract class AdminArquivos {
         try {
         	ObjectInputStream objetoEntrada = new ObjectInputStream(new FileInputStream(nomeArquivo));
         	tabuleiro = (Tabuleiro)objetoEntrada.readObject();
+        	objetoEntrada.close();
         } catch (ClassNotFoundException classNotFoundException) {
         	System.out.println("Classe incompatível.");
         } catch (IOException e) {
@@ -178,26 +179,24 @@ public abstract class AdminArquivos {
     private static String nomeArquivoTabuleiro(Tabuleiro tabuleiro) {
     	// Devolve o nome do arquivo em que está salvo o tabuleiro.
     	// Devolve "" se o tabuleiro não estiver salvo.
-    	String nomeArquivo = "";
-    	int maiorIndiceAntes = indiceTabuleiroMaisRecente();
-    	int maiorIndiceDepois = maiorIndiceAntes;
     	
-    	if (maiorIndiceAntes == -1) // Não há tabuleiros salvos.
-    		return nomeArquivo;
-    	
-    	do {
-    		Tabuleiro tab = lerTabuleiro("tab" + maiorIndiceAntes + ".dat");
-    		
-    		if (tab != null && tab.getID() == tabuleiro.getID())
-    			nomeArquivo = "tab" + maiorIndiceAntes + ".dat";
-    		else {
-    			int aux = maiorIndiceAntes;
-    			maiorIndiceAntes = maiorIndiceDepois;
-    			maiorIndiceDepois = indiceTabuleiroMaisRecente(aux);
-    		}    			
-    	} while (nomeArquivo.equals("") && maiorIndiceAntes != maiorIndiceDepois);
-    	
-    	return nomeArquivo;
+    	String diretorioAtual = System.getProperty("user.dir");
+
+        // Criar um objeto File para o diretório atual
+        File diretorio = new File(diretorioAtual);
+
+        // Pegar todos os arquivos no diretório
+        File[] arquivos = diretorio.listFiles();
+
+        if (arquivos != null)
+            for (File arquivo : arquivos)
+            	if (pegarIndiceDoNome(arquivo.getName()) != -1) {// É o arquivo de um tabuleiro.
+            		Tabuleiro tab = lerTabuleiro(arquivo.getName());
+            		
+            		if (tab.getID() == tabuleiro.getID())
+            			return arquivo.getName();
+            	}
+        return "";
     }
     
     private static int indiceTabuleiroMaisRecente(int aPartirDe) {
@@ -262,5 +261,21 @@ public abstract class AdminArquivos {
     	// Devolve o índice do tabuleiro mais recente salvo.
     	// Devolve -1 se não houver nenhum tabuleiro salvo.
     	return indiceTabuleiroMaisRecente(-1);
+    }
+    
+    public static void printAllFiles() {
+    	// Imprime todos os arquivos no diretório atual.
+    	
+    	String diretorioAtual = System.getProperty("user.dir");
+
+        // Criar um objeto File para o diretório atual
+        File diretorio = new File(diretorioAtual);
+
+        // Pegar todos os arquivos no diretório
+        File[] arquivos = diretorio.listFiles();
+
+        if (arquivos != null)
+            for (File arquivo : arquivos)
+            	System.out.println(arquivo.getName());
     }
 }
