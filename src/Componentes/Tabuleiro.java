@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Tabuleiro implements Serializable {
 	private static final long serialVersionUID = 144L;
-	private final long id = (new Random()).nextLong();
+	private final long id = (new Random()).nextLong(); // Para encontrar o tabuleiro quando ele for salvo a um arquivo.
     private Jogador sente;
     private Jogador gote;
     private Peça[][] grid;
@@ -19,10 +19,16 @@ public class Tabuleiro implements Serializable {
     public Tabuleiro(Jogador sente, Jogador gote) {
         this.sente = sente;
         this.gote = gote;
-        this.grid = new Peça[9][9]; //! no tabuleiro de Shogi a numeração é da direita para a esquerda, de cima para baixo, logo as coordenadas não serão as mesmas da matriz
+        this.grid = new Peça[9][9]; // No tabuleiro de Shogi a numeração é da direita para a esquerda, de cima para baixo. Logo,
+        // as coordenadas não serão as mesmas da matriz.
     }
     
-    public Tabuleiro() { // Construtor vazio para teste de leitura e escrita. Pode sair depois.
+    public Tabuleiro(JogadorOushou oushou, JogadorGyokushou gyokushou) {
+        this.grid = new Peça[9][9];
+        furigoma(gyokushou, oushou);
+    }
+    
+    public Tabuleiro() { 
     	this.sente = new JogadorGyokushou();
     	this.gote = new JogadorOushou();
     	this.grid = new Peça[9][9];
@@ -36,12 +42,20 @@ public class Tabuleiro implements Serializable {
     public Jogador getSente() {
         return this.sente;
     }
+    
+    public void setSente(Jogador jogador) {
+        this.sente = jogador;
+    }
 
     /**
      * @return Gote, o jogador equivalente as pretas no xadrez, o segundo a jogar
      */
     public Jogador getGote() {
         return this.gote;
+    }
+    
+    public void setGote(Jogador jogador) {
+    	this.gote = jogador;
     }
 
     /**
@@ -72,6 +86,30 @@ public class Tabuleiro implements Serializable {
             return true;
         else    
             return false;
+    }
+    
+    /**
+     * No Shogi, o Furigoma é a maneira de determinar quem é o primeiro a jogar (Sente) e quem joga em seguida (Gote).
+     * O Oushou, jogador com maior score, arremessa 5 peões
+     * se o número de peões com a face padrão virada para cima for maior ou igual a 3, o Oushou começa a partida
+     * caso o número de peões com a face promovida virada para cima for maior ou igual a 3, o Gyokushou começa a partida
+     */
+    public void furigoma(Jogador gyokushou, Jogador oushou) {
+    	// Simula o furigoma e estabelece sente e gote.
+        Random random = new Random();
+        int numCartasPadrao = random.nextInt(6);
+        
+        if (numCartasPadrao >= 3) {
+            gyokushou.setEh_sente(false);
+            oushou.setEh_sente(true);
+            setSente(oushou);
+            setGote(gyokushou);
+        } else {
+            gyokushou.setEh_sente(true);
+            oushou.setEh_sente(false);
+            setSente(gyokushou);
+            setGote(oushou);
+        }
     }
 
     /**

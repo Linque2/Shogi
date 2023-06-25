@@ -89,4 +89,10 @@ abstract public class Jogador implements Serializable {
     public boolean colocarPeça() {
         return true;
     }
+    
+    public String toString() {
+    	if (getEh_sente())
+    		return (getNome() + " - Score " + getScore() + " - Sente");
+    	return (getNome() + " - Score " + getScore() + " - Gote");
+    }
 }
