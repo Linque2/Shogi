@@ -62,7 +62,7 @@ public class ShogiGUI {
         tabuleiro.getGrid()[8][2] = new Prata(8, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][3] = new Ouro(8, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][4] = new Rei(8,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
-        tabuleiro.getGrid()[8][5] = new Ouro(8, 5, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][6] = new Prata(8, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
@@ -96,7 +96,7 @@ public class ShogiGUI {
         //exemplo de uma peça no banco
         for (int player = 0; player < NUM_PLAYERS; player++) {
             JPanel bankPanel = painelBancoJogador[player];
-            Cavalo cavalo = new Cavalo(-1, -1, null, null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false);
+            Cavalo cavalo = new Cavalo(0, 0, null, null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false, tabuleiro);
             JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
             bankPanel.add(pieceLabel);
         }
@@ -167,7 +167,8 @@ public class ShogiGUI {
                     cellPanels[row][col].setBackground(Color.YELLOW);
 
                     // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
-                ArrayList<Coordenada>[] validMoves = tabuleiro.getGrid()[row][col].podeAndar();
+                ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
+                System.out.println(validMoves.toString());
                 highlightValidMoves(validMoves);
                 }
             } else {
@@ -192,15 +193,13 @@ public class ShogiGUI {
         }
     }
 
-    private void highlightValidMoves(ArrayList<Coordenada>[] validMoves) {
+    private void highlightValidMoves(ArrayList<Coordenada> validMoves) {
         // Remove o destaque de todos os quadrados
         clearHighlights();
 
         // Adiciona o destaque nos quadrados válidos
-        for (ArrayList<Coordenada> move : validMoves) {
-            Coordenada moveRow = move.get(0);
-            Coordenada moveCol = move.get(1);
-            cellPanels[moveRow.getC_x()][moveCol.getC_y()].setBackground(Color.GREEN);
+        for (Coordenada move : validMoves) {
+            cellPanels[move.getC_x()][move.getC_y()].setBackground(Color.GREEN);
         }
     }
 
