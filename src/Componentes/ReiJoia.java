@@ -14,11 +14,11 @@ public class ReiJoia extends Peça{
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public ReiJoia(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false,"Images/ReiJoia.png", "Images/ReiJoia.png");
+    public ReiJoia(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false,"src/Images/ReiJoia.png", "src/Images/ReiJoia.png", tabuleiro);
     }
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.REI_JOIA.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));

@@ -67,7 +67,12 @@ public class Tabuleiro implements Serializable {
 
     //demais métodos
 
-    public void destacarPossiveisJogadas() {}
+    public boolean estaNoTabuleiro(Coordenada coordenada) {
+        if ((coordenada.getC_x() >= 0 && coordenada.getC_x() <= 8) && (coordenada.getC_y() >= 0 && coordenada.getC_y() <= 8))
+            return true;
+        else    
+            return false;
+    }
 
     /**
      * Função para testes

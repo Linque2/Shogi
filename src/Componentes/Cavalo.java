@@ -6,13 +6,13 @@ package Componentes;
 
 public class Cavalo extends Peça{
 
-    public Cavalo(int x, int y, Jogador jogador, Simbolo[] simbolos ,char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj(),Valor.CAVALO_N.getValor(), capturada, false, "Images/Cavalo.png", "Images/Cavalo_P.png");
+    public Cavalo(int x, int y, Jogador jogador, Simbolo[] simbolos ,char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj(),Valor.CAVALO_N.getValor(), capturada, false, "src/Images/Cavalo.png", "src/Images/Cavalo_P.png", tabuleiro);
     }
 
     //métodos de get e set
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)

@@ -3,6 +3,7 @@
  */
 package Componentes;
 
+import java.util.*;
 public class Ouro extends Peça {
 
      /**
@@ -14,8 +15,8 @@ public class Ouro extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Ouro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "Images/Ouro.png", "Images/Ouro.png");
+    public Ouro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/Images/Ouro.png", "src/Images/Ouro.png", tabuleiro);
     }
 
     // métodos de get e set
@@ -26,7 +27,7 @@ public class Ouro extends Peça {
      * @return "true" caso a jogada seja possível, e translada a posição da peça para a nova posição
      * @return "false" caso a jogada seja impossível
      */
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
@@ -51,7 +52,14 @@ public class Ouro extends Peça {
         return false;
     }
 
-
+    public ArrayList<Coordenada> podeAndar() {
+        ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        for (Coordenada coordenada : Movimento.OURO.getMovimentos()) {
+            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+                jogadasPossíveis.add(coordenada);
+        }
+        return jogadasPossíveis;
+    }
 
     /**
      * Função para testes

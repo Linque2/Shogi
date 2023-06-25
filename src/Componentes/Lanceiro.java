@@ -14,8 +14,8 @@ public class Lanceiro extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Lanceiro(int x, int y, Jogador jogador, Simbolo[] simbolos, Simbolo simbolo,Valor[] valores, Valor valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "Images/Lanceiro.png", "Images/Lanceiro_P.png");
+    public Lanceiro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "src/Images/Lanceiro.png", "src/Images/Lanceiro_P.png", tabuleiro);
     }
 
     // métodos de get e set
@@ -26,7 +26,7 @@ public class Lanceiro extends Peça {
      * @return "true" caso a jogada seja possível, e translada a posição da peça para a nova posição
      * @return "false" caso a jogada seja impossível
      */
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)

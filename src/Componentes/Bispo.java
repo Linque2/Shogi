@@ -14,11 +14,11 @@ public class Bispo extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Bispo(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "Images/Bispo.png", "Images/Bispo_P.png");
+    public Bispo(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "src/Images/Bispo.png", "src/Images/Bispo_P.png", tabuleiro);
     }
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf) {
+    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)

@@ -46,19 +46,19 @@ public class ShogiGUI {
         }
 
         // Como as peças devem ser adicionadas:
-        tabuleiro.getGrid()[0][0] = new Lanceiro(0,0, null, null, null, null, null, false);
-        tabuleiro.getGrid()[0][1] = new Cavalo(0, 1, null, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false);
-        tabuleiro.getGrid()[0][2] = new Prata(0, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false);
-        tabuleiro.getGrid()[0][3] = new Ouro(0, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false);
-        tabuleiro.getGrid()[0][4] = new Rei(0,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false);
-        tabuleiro.getGrid()[0][5] = new Ouro(0, 5, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false);
-        tabuleiro.getGrid()[0][6] = new Prata(0, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false);
-        tabuleiro.getGrid()[0][7] = new Cavalo(0, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false);
-        tabuleiro.getGrid()[0][8] = new Bispo(0,8, null, null, 'C', null, 4, false);
-        tabuleiro.getGrid()[1][1] = new Bispo(1,1, null, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false);
-        tabuleiro.getGrid()[1][7] = new Torre(1,7, null, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
+        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, null, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
+        tabuleiro.getGrid()[8][2] = new Prata(8, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][4] = new Rei(8,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
+        tabuleiro.getGrid()[8][5] = new Ouro(8, 5, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][6] = new Prata(8, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][1] = new Bispo(7,1, null, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][7] = new Torre(7,7, null, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
         for (int coluna=0; coluna<9; coluna++){
-            tabuleiro.getGrid()[2][coluna] = new Peão(2, coluna, null, Simbolo.PEAO_N.getSimbolo(), coluna, false);
+            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, null, Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
         }
             
 
