@@ -58,6 +58,7 @@ public class Ouro extends Peça {
             if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
                 jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
         }
+
         return jogadasPossíveis;
     }
 
@@ -66,16 +67,8 @@ public class Ouro extends Peça {
      * @param args
      */
     public static void main(String[] args) {
-        Coordenada vetor = new Coordenada(0, 1);
-        System.out.println(vetor);
-        System.out.println(Movimento.OURO.getMovimentos());
-        if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) 
-            System.out.println("TRUE!");
-        else
-            System.out.println("FALSE!");
+        Tabuleiro tabuleiro = new Tabuleiro(null, null);
+        Ouro ouro = new Ouro(5, 5, null, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(), Valor.OURO.getValor(), false, tabuleiro);
+        System.out.print(ouro.podeAndar());
     }
-
-
-    
-    
 }

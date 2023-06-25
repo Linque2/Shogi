@@ -4,6 +4,8 @@
 
 package Componentes;
 
+import java.util.ArrayList;
+
 public class Rei extends Peça{
     
      /**
@@ -28,6 +30,16 @@ public class Rei extends Peça{
             return false;
     }
 
+    public ArrayList<Coordenada> podeAndar() {
+        ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        for (Coordenada coordenada : Movimento.REI.getMovimentos()) {
+            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+                jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+        }
+
+        return jogadasPossíveis;
+    }
+
     @Override
     /**
      * @return O método retorna sempre "false", pois o Rei não possui promoção
@@ -43,5 +55,7 @@ public class Rei extends Peça{
     public boolean despromoverPeça() {
         return false;
     }
+
+    
 
 }

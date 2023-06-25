@@ -4,6 +4,8 @@
 
 package Componentes;
 
+import java.util.ArrayList;
+
 public class ReiJoia extends Peça{
      /**
      * Construtor da classe ReiJoia que herda de "Peça"
@@ -26,6 +28,17 @@ public class ReiJoia extends Peça{
         } else
             return false;
     }
+
+    public ArrayList<Coordenada> podeAndar() {
+        ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        for (Coordenada coordenada : Movimento.REI_JOIA.getMovimentos()) {
+            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+                jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+        }
+
+        return jogadasPossíveis;
+    }
+
 
     @Override
     /**

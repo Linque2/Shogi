@@ -4,6 +4,8 @@
 
 package Componentes;
 
+import java.util.ArrayList;
+
 public class Prata extends Peça {
 
     public Prata(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
@@ -33,5 +35,32 @@ public class Prata extends Peça {
                     return false;
         }
         return false;
+    }
+
+    public ArrayList<Coordenada> podeAndar() {
+        ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        int estaPromovida;
+        if (getPromovida() == true)
+            estaPromovida = 1;
+        else
+            estaPromovida = 0;
+
+        switch(estaPromovida){
+            case 0: 
+                for (Coordenada coordenada : Movimento.PRATA_N.getMovimentos()) {
+                    if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+                        jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+                }
+
+                return jogadasPossíveis;
+            case 1: 
+                for (Coordenada coordenada : Movimento.PRATA_P.getMovimentos()) {
+                    if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+                        jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+                    }
+
+                return jogadasPossíveis;
+        }
+        return null;
     }
 }
