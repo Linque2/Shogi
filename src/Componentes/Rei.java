@@ -33,7 +33,9 @@ public class Rei extends Peça{
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
         for (Coordenada coordenada : Movimento.REI.getMovimentos()) {
-            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
+            Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+            if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
                 jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
         }
 
