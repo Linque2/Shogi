@@ -55,14 +55,15 @@ public class ShogiGUI {
                 boardPanel.add(cellPanel);
             }
         }
-
+        //Instanciando um jogador exemplo
+        JogadorGyokushou jogador = new JogadorGyokushou("Pedro", 21, true);
         // Como as peças devem ser adicionadas:
         tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
         tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, null, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
         tabuleiro.getGrid()[8][2] = new Prata(8, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][4] = new Rei(8,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
-        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][4] = new Rei(8,4, jogador, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][6] = new Prata(8, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
