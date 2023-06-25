@@ -7,7 +7,7 @@ package Componentes;
 public class Peão extends Peça{
 
     public Peão(int x, int y, Jogador jogador, char simbolo, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false);
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "Images/Peão.png", "Images/Peão_P.png");
     }
 
     // métodos de get e set

@@ -15,7 +15,7 @@ public class Bispo extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Bispo(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false);
+        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "Images/Bispo.png", "Images/Bispo_P.png");
     }
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {

@@ -5,6 +5,8 @@
 package Componentes;
 
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 
@@ -18,7 +20,7 @@ abstract public class Peça {
     private int valor;// Valor do estado atual da peça
     private boolean capturada;
     private boolean promovida;
-    private ImageIcon[] ListImageIcon;
+    private ArrayList<ImageIcon> ListImageIcon;
 
     /**
      * Construtor da classe abstrata "Peça"
@@ -42,12 +44,15 @@ abstract public class Peça {
         this.valor = valor;
         this.capturada = capturada;
         this.promovida = promovida;
-        this.ListImageIcon[0] = new ImageIcon(imageString_N);
-        this.ListImageIcon[1] = new ImageIcon(imageString_P);
+        this.ListImageIcon = new ArrayList<ImageIcon>();
+        ImageIcon image1 = new ImageIcon(imageString_N);
+        ImageIcon image2 = new ImageIcon(imageString_P);
+        this.ListImageIcon.add(image1);
+        this.ListImageIcon.add(image2);
     }
 
     // métodos de get e set
-    public ImageIcon[] getListImageIcon() {
+    public ArrayList<ImageIcon> getListImageIcon() {
         return ListImageIcon;
     }
 

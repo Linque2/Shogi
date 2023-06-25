@@ -7,7 +7,7 @@ package Componentes;
 public class Cavalo extends Peça{
 
     public Cavalo(int x, int y, Jogador jogador, Simbolo[] simbolos ,char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj(),Valor.CAVALO_N.getValor(), capturada, false);
+        super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj(),Valor.CAVALO_N.getValor(), capturada, false, "Images/Cavalo.png", "Images/Cavalo_P.png");
     }
 
     //métodos de get e set

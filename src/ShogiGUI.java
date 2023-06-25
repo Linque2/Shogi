@@ -47,14 +47,18 @@ public class ShogiGUI {
 
         // Como as peças devem ser adicionadas:
         tabuleiro.getGrid()[0][0] = new Lanceiro(0,0, null, null, null, null, null, false);
-        tabuleiro.getGrid()[0][1] = new Cavalo(0, 1, null, null, null, null,null , false);
-        tabuleiro.getGrid()[0][4] = new Rei(0,4, null, null, null, null, COLS, false);
-        tabuleiro.getGrid()[0][7] = new Cavalo(0,7, null, null, 0, null, COLS, false);
-        tabuleiro.getGrid()[0][8] = new Lanceiro(0,8, null, null, null, null, null, false);
-        tabuleiro.getGrid()[1][1] = new Torre(1,1, null, null, 0, null, COLS, false);
-        tabuleiro.getGrid()[1][7] = new Torre(1,7, null, null, 0, null, COLS, false);
+        tabuleiro.getGrid()[0][1] = new Cavalo(0, 1, null, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false);
+        tabuleiro.getGrid()[0][2] = new Prata(0, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[0][3] = new Ouro(0, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[0][4] = new Rei(0,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false);
+        tabuleiro.getGrid()[0][5] = new Ouro(0, 5, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[0][6] = new Prata(0, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[0][7] = new Cavalo(0, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false);
+        tabuleiro.getGrid()[0][8] = new Bispo(0,8, null, null, 'C', null, 4, false);
+        tabuleiro.getGrid()[1][1] = new Bispo(1,1, null, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false);
+        tabuleiro.getGrid()[1][7] = new Torre(1,7, null, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false);
         for (int coluna=0; coluna<9; coluna++){
-            tabuleiro.getGrid()[2][coluna] = new Peão(2, coluna, null, 0, coluna, false);
+            tabuleiro.getGrid()[2][coluna] = new Peão(2, coluna, null, Simbolo.PEAO_N.getSimbolo(), coluna, false);
         }
             
 
@@ -71,7 +75,7 @@ public class ShogiGUI {
                 Peça peça = tabuleiro.getGrid()[row][col];
                 if (peça != null) {
                     //Seta a imagem da peça
-                    JLabel pieceLabel = new JLabel(peça.getImageIcon());
+                    JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
                     pieceLabel.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(pieceLabel, BorderLayout.CENTER);
                 }
@@ -143,19 +147,6 @@ public class ShogiGUI {
             // Lógica para verificar se a jogada é válida 
             return true; // Temporariamente, retorna true para permitir qualquer movimento
         }
-    }
-
-    private class Piece {
-        // Classe exemplo
-        private ImageIcon imageIcon;
-
-        public Piece(String imagePath) {
-            this.imageIcon = new ImageIcon(imagePath);
-        }
-        public ImageIcon getImageIcon() {
-            return imageIcon;
-        }
-     
     }
 
     public static void main(String[] args) {
