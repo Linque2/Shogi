@@ -4,10 +4,14 @@
 
 package Componentes;
 
-import javax.lang.model.util.ElementScanner6;
 
-abstract public class Peça {
-    
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import java.io.*;
+
+abstract public class Peça implements Serializable {
+    private static final long serialVersionUID = 324L;
     private Coordenada coordenada;
     private Jogador jogador;
     private final Simbolo[] simbolos; // Par de ideogramas gravados na peça
@@ -16,6 +20,7 @@ abstract public class Peça {
     private int valor;// Valor do estado atual da peça
     private boolean capturada;
     private boolean promovida;
+    private ArrayList<ImageIcon> ListImageIcon;
 
     /**
      * Construtor da classe abstrata "Peça"
@@ -29,8 +34,9 @@ abstract public class Peça {
      * "false" se a peça não foi capturada e está em jogo
      *@param promovida assume "0" se a peça está em sua forma normal, e "1" se a peça está na sua forma promovida       
      */
-    public Peça(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, boolean promovida) {
-        this.coordenada = coordenada;
+    public Peça(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, boolean promovida, String imageString_N, String imageString_P) {
+        
+        this.coordenada = new Coordenada(x, y);
         this.jogador = jogador;
         this.simbolos = simbolos;
         this.simbolo = simbolo;
@@ -38,9 +44,17 @@ abstract public class Peça {
         this.valor = valor;
         this.capturada = capturada;
         this.promovida = promovida;
+        this.ListImageIcon = new ArrayList<ImageIcon>();
+        ImageIcon image1 = new ImageIcon(imageString_N);
+        ImageIcon image2 = new ImageIcon(imageString_P);
+        this.ListImageIcon.add(image1);
+        this.ListImageIcon.add(image2);
     }
 
     // métodos de get e set
+    public ArrayList<ImageIcon> getListImageIcon() {
+        return ListImageIcon;
+    }
 
     /**
      * @return As coordenadas da peça no tabuleiro

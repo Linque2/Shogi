@@ -5,8 +5,8 @@ package Componentes;
 
 public class Torre extends Peça{
 
-    public Torre(Coordenada coordenada, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
-        super(coordenada, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false);
+    public Torre(int x, int y,Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada) {
+        super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "Images/Torre.png", "Images/Torre_P.png");
     };
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf) {
