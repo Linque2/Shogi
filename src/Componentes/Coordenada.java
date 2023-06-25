@@ -1,9 +1,11 @@
 package Componentes;
 
 import java.util.*;
+import java.io.*;
 
-public class Coordenada {
-    private int c_x;
+public class Coordenada implements Serializable {
+	private static final long serialVersionUID = 441L;
+	private int c_x;
     private int c_y;
 
     /**

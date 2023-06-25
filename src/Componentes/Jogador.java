@@ -4,9 +4,11 @@
 
 package Componentes;
 import java.util.*;
+import java.io.*;
 
-abstract public class Jogador {
-    private String nome;
+abstract public class Jogador implements Serializable {
+	private static final long serialVersionUID = 225L;
+	private String nome;
     private int score;
     private boolean eh_sente;
     private ArrayList<Peça> peçasTab;
@@ -26,6 +28,14 @@ abstract public class Jogador {
         this.score = score;
         this.eh_sente = eh_sente;
         this.peçasTab = new ArrayList<Peça>();
+        this.peçasBanco = new ArrayList<Peça>(); 
+    }
+    
+    public Jogador() { // Construtor vazio para teste de leitura e escrita. Pode sair depois.
+    	this.nome = "NOME";
+    	this.score = 1;
+    	this.eh_sente = true;
+    	this.peçasTab = new ArrayList<Peça>();
         this.peçasBanco = new ArrayList<Peça>(); 
     }
 

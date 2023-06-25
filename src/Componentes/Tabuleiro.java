@@ -1,6 +1,11 @@
 package Componentes;
 
-public class Tabuleiro {
+import java.io.*;
+import java.util.Random;
+
+public class Tabuleiro implements Serializable {
+	private static final long serialVersionUID = 144L;
+	private final long id = (new Random()).nextLong();
     private Jogador sente;
     private Jogador gote;
     private Peça[][] grid;
@@ -15,6 +20,12 @@ public class Tabuleiro {
         this.sente = sente;
         this.gote = gote;
         this.grid = new Peça[9][9]; //! no tabuleiro de Shogi a numeração é da direita para a esquerda, de cima para baixo, logo as coordenadas não serão as mesmas da matriz
+    }
+    
+    public Tabuleiro() { // Construtor vazio para teste de leitura e escrita. Pode sair depois.
+    	this.sente = new JogadorGyokushou();
+    	this.gote = new JogadorOushou();
+    	this.grid = new Peça[9][9];
     }
 
     //métodos de get e set
@@ -38,6 +49,13 @@ public class Tabuleiro {
      */
     public Peça[][] getGrid() {
         return this.grid;
+    }
+    
+    /**
+     * @return O id do tabuleiro.
+     */
+    public long getID() {
+        return this.id;
     }
 
     /**

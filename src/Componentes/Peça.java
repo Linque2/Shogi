@@ -8,10 +8,10 @@ package Componentes;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import java.io.*;
 
-
-abstract public class Peça {
-    
+abstract public class Peça implements Serializable {
+    private static final long serialVersionUID = 324L;
     private Coordenada coordenada;
     private Jogador jogador;
     private final Simbolo[] simbolos; // Par de ideogramas gravados na peça
