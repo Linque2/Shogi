@@ -1,20 +1,23 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import Componentes.*;
 
 public class ShogiGUI {
     private static final int ROWS = 9;
     private static final int COLS = 9;
     private static final int BANK_SIZE = 10;
+    private static final int NUM_PLAYERS = 2;
     private static final Color LIGHT_COLOR = new Color(222, 184, 135); // Bege
     private static final Color BORDER_COLOR = Color.BLACK;
 
     private JFrame frame;
     private JPanel boardPanel;
     private JPanel[][] cellPanels;
-    private JPanel painelBanco;
-    private JScrollPane painelBancoScroll;
+    private JPanel[] painelBancoJogador;
+    private JScrollPane[] painelBancoJogadorScroll;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
@@ -27,11 +30,12 @@ public class ShogiGUI {
         tabuleiro.setGrid(new Peça[ROWS][COLS]);
 
         initializeBoard(tabuleiro);
-        initializePainelBanco(tabuleiro);
+        initializePainelBancoJogador(tabuleiro);
 
         frame.setLayout(new BorderLayout());
         frame.add(boardPanel, BorderLayout.CENTER);
-        frame.add(painelBancoScroll, BorderLayout.EAST);
+        frame.add(painelBancoJogadorScroll[0], BorderLayout.EAST);
+        frame.add(painelBancoJogadorScroll[1], BorderLayout.WEST);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -70,16 +74,30 @@ public class ShogiGUI {
         updateBoardUI(tabuleiro);
     }
 
-    private void initializePainelBanco(Tabuleiro tabuleiro) {
-        painelBanco = new JPanel(new GridLayout(BANK_SIZE, 1));
-        painelBancoScroll = new JScrollPane(painelBanco);
-        painelBancoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        painelBancoScroll.setPreferredSize(new Dimension(200, frame.getHeight()));
+    private void initializePainelBancoJogador(Tabuleiro tabuleiro) {
+        painelBancoJogador = new JPanel[NUM_PLAYERS];
+        painelBancoJogadorScroll = new JScrollPane[NUM_PLAYERS];
 
+       for (int player = 0; player < NUM_PLAYERS; player++) {
+            JPanel bankPanel = new JPanel(new GridLayout(BANK_SIZE, 1));
+            JScrollPane bankScrollPane = new JScrollPane(bankPanel);
+            bankScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            bankScrollPane.setPreferredSize(new Dimension(200, frame.getHeight()));
+            //Adicionando título
+            TitledBorder titledBorder = BorderFactory.createTitledBorder("Jogador " + (player + 1));
+            titledBorder.setTitleJustification(TitledBorder.CENTER);
+            bankScrollPane.setBorder(titledBorder);
+
+            painelBancoJogador[player] = bankPanel;
+            painelBancoJogadorScroll[player] = bankScrollPane;
+        }
         //exemplo de uma peça no banco
-        Cavalo cavalo = new Cavalo(-1, -1, null, null, Simbolo.CAVALO_N.getSimbolo(), null, BANK_SIZE, false);
-        JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
-        painelBanco.add(pieceLabel);
+        for (int player = 0; player < NUM_PLAYERS; player++) {
+            JPanel bankPanel = painelBancoJogador[player];
+            Cavalo cavalo = new Cavalo(-1, -1, null, null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false);
+            JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
+            bankPanel.add(pieceLabel);
+        }
     }
 
     private void updateBoardUI(Tabuleiro tabuleiro) {
