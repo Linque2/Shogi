@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -163,6 +165,10 @@ public class ShogiGUI {
                     selectedRow = row;
                     selectedCol = col;
                     cellPanels[row][col].setBackground(Color.YELLOW);
+
+                    // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
+                ArrayList<Coordenada>[] validMoves = tabuleiro.getGrid()[row][col].podeAndar();
+                highlightValidMoves(validMoves);
                 }
             } else {
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
@@ -183,6 +189,26 @@ public class ShogiGUI {
         private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
             // Lógica para verificar se a jogada é válida 
             return true; // Temporariamente, retorna true para permitir qualquer movimento
+        }
+    }
+
+    private void highlightValidMoves(ArrayList<Coordenada>[] validMoves) {
+        // Remove o destaque de todos os quadrados
+        clearHighlights();
+
+        // Adiciona o destaque nos quadrados válidos
+        for (ArrayList<Coordenada> move : validMoves) {
+            Coordenada moveRow = move.get(0);
+            Coordenada moveCol = move.get(1);
+            cellPanels[moveRow.getC_x()][moveCol.getC_y()].setBackground(Color.GREEN);
+        }
+    }
+
+    private void clearHighlights() {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                cellPanels[row][col].setBackground(LIGHT_COLOR);
+            }
         }
     }
 
