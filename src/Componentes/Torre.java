@@ -5,10 +5,20 @@ package Componentes;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Torre extends Peça{
 
     public Torre(int x, int y,Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
         super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "src/Images/Torre.png", "src/Images/Torre_P.png", tabuleiro);
+        if (jogador instanceof JogadorGyokushou) {
+            getListImageIcon().remove(0);
+            getListImageIcon().remove(1);
+            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Torre.png");
+            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Torre_P.png");
+            getListImageIcon().add(image1);
+            getListImageIcon().add(image2);
+        }
     };
 
     public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {
