@@ -58,7 +58,7 @@ public class ShogiGUI {
         //Instanciando um jogador exemplo
         JogadorGyokushou jogador = new JogadorGyokushou("Pedro", 21, true);
         JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
-        // Como as peças devem ser adicionadas:
+        // Como as peças devem ser adicionadas:s
         tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
         tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
         tabuleiro.getGrid()[8][2] = new Prata(8, 2, jogador, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
@@ -75,10 +75,10 @@ public class ShogiGUI {
         }
 
         // ! TESTE
-        tabuleiro.getGrid()[4][4] = new Torre(4,4, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);            
-        tabuleiro.getGrid()[4][5] = new Lanceiro(4,5, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro); 
-        tabuleiro.getGrid()[2][4] = new Ouro(2, 4, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[2][8] = new Torre(2, 8, jogador2, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Torre(4,4, jogador, null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
+        tabuleiro.getGrid()[4][4].promoverPeça();
+        tabuleiro.getGrid()[4][5] = new Bispo(4,5, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[2][7] = new Torre(2, 7, jogador2, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
 
         updateBoardUI(tabuleiro);
     }

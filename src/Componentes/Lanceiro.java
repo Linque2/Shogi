@@ -70,7 +70,8 @@ public class Lanceiro extends Peça {
                     if (peçaBloq == null) { // Caso não hajam peças no caminho 
                         while (getTabuleiro().estaNoTabuleiro(Pf)) {
                             Pf = Coordenada.transladarCoordenada(coordenada, Pf);
-                            jogadasPossíveis.add(Pf);
+                            if (getTabuleiro().estaNoTabuleiro(Pf))
+                                jogadasPossíveis.add(Pf);
                         }
                     }
                     

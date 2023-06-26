@@ -17,7 +17,7 @@ public class Bispo extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Bispo(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "Images/Bispo.png", "Images/Bispo_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "src/Images/Bispo.png", "src/Images/Bispo_P.png", tabuleiro);
     }
 
     public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
@@ -48,7 +48,7 @@ public class Bispo extends Peça {
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
         Peça peçaBloq;
-        Coordenada Pf = getCoordenada();
+        
         int estaPromovida;
         if (getPromovida() == true)
             estaPromovida = 1;
@@ -57,27 +57,31 @@ public class Bispo extends Peça {
 
         switch(estaPromovida){
             case 1: 
-                for (Coordenada coordenada : Movimento.TORRE_P.getMovimentos()) {
-                Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+                for (Coordenada vetor : Movimento.BISPO_P.getMovimentos()) {
+                    peçaBloq = getTabuleiro().buscaPeça(vetor, getCoordenada());
+                    Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), vetor);
                     if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
-                            jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+                            jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), vetor));
                 }
 
             case 0: 
-                for (Coordenada coordenada : Movimento.TORRE_N.getMovimentos()) {
-                    peçaBloq = getTabuleiro().buscaPeça(coordenada, getCoordenada());
+                for (Coordenada vetor : Movimento.BISPO_N.getMovimentos()) {
+                    Coordenada Pf = getCoordenada();
+                    System.out.println(Movimento.BISPO_N.getMovimentos());
+                    peçaBloq = getTabuleiro().buscaPeça(vetor, getCoordenada());
                     if (peçaBloq == null) { // Caso não hajam peças no caminho 
                         while (getTabuleiro().estaNoTabuleiro(Pf)) {
-                            Pf = Coordenada.transladarCoordenada(coordenada, Pf);
-                            jogadasPossíveis.add(Pf);
+                            Pf = Coordenada.transladarCoordenada(vetor, Pf);
+                            if (getTabuleiro().estaNoTabuleiro(Pf))
+                                jogadasPossíveis.add(Pf);
                         }
                     }
                     
                     else if (peçaBloq != null) { // Quando há uma pessa que bloqueia o caminho
                         if (peçaBloq.getJogador().equals(getJogador())) { // A peça que bloqueia é aliada
                             while (!(Pf.equals(peçaBloq.getCoordenada()))) {
-                                Pf = Coordenada.transladarCoordenada(coordenada, Pf);
+                                Pf = Coordenada.transladarCoordenada(vetor, Pf);
                                 jogadasPossíveis.add(Pf);
                                 if (Pf.equals(peçaBloq.getCoordenada()))
                                     jogadasPossíveis.remove(Pf);
@@ -85,14 +89,14 @@ public class Bispo extends Peça {
 
                         }else if (!(peçaBloq.getJogador().equals(getJogador()))) { // A peça que bloqueia é inimiga
                             while (!(Pf.equals(peçaBloq.getCoordenada()))) {
-                                Pf = Coordenada.transladarCoordenada(coordenada, Pf);
+                                Pf = Coordenada.transladarCoordenada(vetor, Pf);
                                 jogadasPossíveis.add(Pf);
                             } 
                         } 
                     }           
                 }
 
-                return jogadasPossíveis;
+            return jogadasPossíveis;
         }
         return null;
     }
