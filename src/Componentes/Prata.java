@@ -12,30 +12,20 @@ public class Prata extends Peça {
         super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "src/Images/Prata.png", "src/Images/Prata_P.png", tabuleiro);
     };
 
-/*     public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
-        Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
-        int estaPromovida;
-        if (getPromovida() == true)
-            estaPromovida = 1;
-        else
-            estaPromovida = 0;
-
-        switch(estaPromovida){
-            case 0: 
-                if (vetor.contemVetorParalelo(Movimento.PRATA_N.getMovimentos())) {
-                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
-                    return true;
-                } else
-                    return false;
-            case 1: 
-                if (vetor.estaNaLista(Movimento.PRATA_P.getMovimentos())) {
-                    setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
-                    return true;
-                } else
-                    return false;
-        }
-        return false;
-    } */
+    public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {
+        ArrayList<Coordenada> jogadasPossíveis = podeAndar();
+            if (Pf.estaNaLista(jogadasPossíveis)) {
+            if (getJogador() instanceof JogadorOushou)
+                if (Pf.getC_x() < 3)
+                    promoverPeça();
+                if (getJogador() instanceof JogadorGyokushou)
+                if (Pf.getC_x() > 5)
+                    promoverPeça();
+            setCoordenada(Pf);
+            return true;
+        } else
+            return false;
+    }
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();

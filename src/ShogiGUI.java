@@ -75,7 +75,6 @@ public class ShogiGUI {
 
         // ! TESTE
         tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getGyokushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
-        tabuleiro.getGrid()[4][4].promoverPeça();
         tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getGyokushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
         tabuleiro.getGrid()[4][5].promoverPeça();
         tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
@@ -189,13 +188,12 @@ public class ShogiGUI {
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
                 if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
     
-                    if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
-                        Peça captura;
-                        captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);
+                    /* if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
+                        Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);;
                         // ! Fazer função para adicionar na mesa  visualmente
                         //tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
-                        tabuleiro.getGrid()[row][col] = null;
-                    }
+                        tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
+                    } */
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
