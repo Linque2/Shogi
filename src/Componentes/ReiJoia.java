@@ -4,6 +4,8 @@
 
 package Componentes;
 
+import java.util.ArrayList;
+
 public class ReiJoia extends Peça{
      /**
      * Construtor da classe ReiJoia que herda de "Peça"
@@ -18,14 +20,27 @@ public class ReiJoia extends Peça{
         super(x, y, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false,"src/Images/ReiJoia.png", "src/Images/ReiJoia.png", tabuleiro);
     }
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+    /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.REI_JOIA.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
             return true;
         } else
             return false;
+    } */
+
+    public ArrayList<Coordenada> podeAndar() {
+        ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        for (Coordenada coordenada : Movimento.REI_JOIA.getMovimentos()) {
+            Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+            if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
+                jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+        }
+
+        return jogadasPossíveis;
     }
+
 
     @Override
     /**

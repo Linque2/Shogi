@@ -2,7 +2,7 @@ package Componentes;
 
 public enum SentidosFundamentais {
     
-    NORTE(new Coordenada(-1,0)),
+    NORTE(new Coordenada(-1, 0)),
     SUL(new Coordenada(1,0)),
     LESTE(new Coordenada(0,-1)),
     OESTE(new Coordenada(0, 1)),

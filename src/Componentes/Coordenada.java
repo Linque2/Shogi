@@ -88,6 +88,12 @@ public class Coordenada implements Serializable {
         return false;
     }
 
+    public boolean equals(Coordenada coordenada) {
+        if (coordenada.getC_x() == getC_x() && coordenada.getC_y() == getC_y())
+                return true;
+        return false;
+    }
+
     /**
      * Verifica se o vetor dadeo é paralelo a um outro
      * @param vetor Vetor que queremos comparar com o vetor que chama o método

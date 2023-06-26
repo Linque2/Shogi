@@ -55,24 +55,33 @@ public class ShogiGUI {
                 boardPanel.add(cellPanel);
             }
         }
-
-        // Como as peças devem ser adicionadas:
-        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
-        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, null, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
-        tabuleiro.getGrid()[8][2] = new Prata(8, 2, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][4] = new Rei(8,4, null, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
-        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, null, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][6] = new Prata(8, 6, null, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, null, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, null, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
-        tabuleiro.getGrid()[7][1] = new Bispo(7,1, null, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
-        tabuleiro.getGrid()[7][7] = new Torre(7,7, null, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
-        for (int coluna=0; coluna<9; coluna++){
-            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, null, Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
+        //Instanciando um jogador exemplo
+        JogadorGyokushou jogador = new JogadorGyokushou("Pedro", 21, true);
+        //JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
+        // Como as peças devem ser adicionadas:s
+        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
+        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
+        tabuleiro.getGrid()[8][2] = new Prata(8, 2, jogador, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][4] = new Rei(8,4, jogador, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][6] = new Prata(8, 6, jogador, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][1] = new Bispo(7,1, jogador, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][7] = new Torre(7,7, jogador, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
+        for (int coluna=0; coluna<8; coluna++){
+            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, jogador, Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
         }
-            
 
+        // ! TESTE
+        tabuleiro.getGrid()[4][4] = new Torre(4,4, jogador, null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
+        tabuleiro.getGrid()[4][4].promoverPeça();
+        tabuleiro.getGrid()[4][5] = new Peão(4, 5, jogador, Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
+        tabuleiro.getGrid()[4][5].promoverPeça();
+        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7].promoverPeça();
+        
         updateBoardUI(tabuleiro);
     }
 
@@ -107,12 +116,17 @@ public class ShogiGUI {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 JPanel cellPanel = cellPanels[row][col];
+                JLabel pieceLabel;
                 cellPanel.removeAll();
 
                 Peça peça = tabuleiro.getGrid()[row][col];
                 if (peça != null) {
                     //Seta a imagem da peça
-                    JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
+                    if (peça.getPromovida() == false) { // !fiz auterações na exibição dos ícones
+                        pieceLabel = new JLabel(peça.getListImageIcon().get(0)); 
+                    } else {
+                        pieceLabel = new JLabel(peça.getListImageIcon().get(1));
+                    }
                     pieceLabel.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(pieceLabel, BorderLayout.CENTER);
                 }
@@ -159,7 +173,7 @@ public class ShogiGUI {
 
         @Override
         public void mouseClicked(MouseEvent event) {
-            if (selectedRow == -1 && selectedCol == -1) {
+            //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if (tabuleiro.getGrid()[row][col] != null) {
                     selectedRow = row;
@@ -168,29 +182,30 @@ public class ShogiGUI {
 
                     // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
                 ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
-                System.out.println(validMoves.toString());
                 highlightValidMoves(validMoves);
                 }
-            } else {
+             else {
+                Coordenada coordenada_final = new Coordenada(row, col);
+
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
-                if (isValidMove(selectedRow, selectedCol, row, col)) {
+                if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
                     cellPanels[row][col].setBackground(LIGHT_COLOR);
+                    updateBoardUI(tabuleiro);
+                    clearHighlights();
+                }
 
-                    selectedRow = -1;
-                    selectedCol = -1;
-                } else {
+                else {
                     JOptionPane.showMessageDialog(frame, "Jogada inválida!");
                 }
+                selectedRow = -1;
+                selectedCol = -1;
             }
         }
 
-        private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
-            // Lógica para verificar se a jogada é válida 
-            return true; // Temporariamente, retorna true para permitir qualquer movimento
-        }
+
     }
 
     private void highlightValidMoves(ArrayList<Coordenada> validMoves) {

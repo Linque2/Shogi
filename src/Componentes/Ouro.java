@@ -16,7 +16,7 @@ public class Ouro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Ouro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "Images/Ouro.png", "Images/Ouro.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/Images/Ouro.png", "src/Images/Ouro.png", tabuleiro);
     }
 
     // métodos de get e set
@@ -27,14 +27,14 @@ public class Ouro extends Peça {
      * @return "true" caso a jogada seja possível, e translada a posição da peça para a nova posição
      * @return "false" caso a jogada seja impossível
      */
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+   /*  public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
             return true;
         } else
             return false;
-    }
+    } */
 
     @Override
     /**
@@ -55,9 +55,12 @@ public class Ouro extends Peça {
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
         for (Coordenada coordenada : Movimento.OURO.getMovimentos()) {
-            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
-                jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+            Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+            if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
+                    jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
         }
+
         return jogadasPossíveis;
     }
 
@@ -66,16 +69,8 @@ public class Ouro extends Peça {
      * @param args
      */
     public static void main(String[] args) {
-        Coordenada vetor = new Coordenada(0, 1);
-        System.out.println(vetor);
-        System.out.println(Movimento.OURO.getMovimentos());
-        if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) 
-            System.out.println("TRUE!");
-        else
-            System.out.println("FALSE!");
+        Tabuleiro tabuleiro = new Tabuleiro(null, null);
+        Ouro ouro = new Ouro(5, 5, null, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(), Valor.OURO.getValor(), false, tabuleiro);
+        System.out.print(ouro.podeAndar());
     }
-
-
-    
-    
 }
