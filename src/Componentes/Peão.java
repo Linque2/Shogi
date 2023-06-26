@@ -11,8 +11,11 @@ import javax.swing.ImageIcon;
 public class Peão extends Peça{
 
     public Peão(int x, int y, JogadorOushou jogador, char simbolo, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "Images/Peão.png", "Images/Peão_P.png", tabuleiro);
-      
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "src/Images/Peão.png", "src/Images/Peão_P.png", tabuleiro);
+    }
+
+    public Peão(int x, int y, JogadorGyokushou jogador, char simbolo, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "src/ImagensInvertidas/Peão.png", "src/ImagensInvertidas/Peão_P.png", tabuleiro);
     }
 
     // métodos de get e set

@@ -227,7 +227,7 @@ abstract public class Peça implements Serializable {
         Peça captura = tabuleiro.getGrid()[Pf.getC_x()][Pf.getC_y()];
         if (!(andarPara(Pf, tabuleiro)))
             return null;
-        if (captura != null && captura.getJogador() != getJogador()) {
+        if (captura != null && !(captura.getJogador().equals(getJogador()))) {
             captura.getJogador().getPeçasTab().remove(captura);
             captura.setJogador(getJogador());
             getJogador().getPeçasBanco().add(captura);

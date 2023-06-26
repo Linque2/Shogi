@@ -70,7 +70,7 @@ public class ShogiGUI {
         tabuleiro.getGrid()[7][1] = new Bispo(7,1, tabuleiro.getOushou(), null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
         tabuleiro.getGrid()[7][7] = new Torre(7,7, tabuleiro.getOushou(), null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
         for (int coluna=0; coluna<8; coluna++){
-            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, tabuleiro.getOushou(), Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
+            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, tabuleiro.getOushou(), Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro); 
         }
 
         // ! TESTE
@@ -103,7 +103,7 @@ public class ShogiGUI {
         //exemplo de uma peça no banco
         for (int player = 0; player < NUM_PLAYERS; player++) {
             JPanel bankPanel = painelBancoJogador[player];
-            Cavalo cavalo = new Cavalo(0, 0, null, null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false, tabuleiro);
+            Cavalo cavalo = new Cavalo(0, 0, tabuleiro.getGyokushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false, tabuleiro);
             JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
             bankPanel.add(pieceLabel);
         }
@@ -190,7 +190,7 @@ public class ShogiGUI {
                     if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
                         Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);;
                         // ! Fazer função para adicionar na mesa  visualmente
-                        tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
+                        //tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                         System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
                     }

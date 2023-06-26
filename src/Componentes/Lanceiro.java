@@ -18,17 +18,14 @@ public class Lanceiro extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Lanceiro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+    public Lanceiro(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
         super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "src/Images/Lanceiro.png", "src/Images/Lanceiro_P.png", tabuleiro);
-        if (jogador instanceof JogadorGyokushou) {
-            getListImageIcon().remove(0);
-            getListImageIcon().remove(1);
-            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Lanceiro.png");
-            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Lanceiro_P.png");
-            getListImageIcon().add(image1);
-            getListImageIcon().add(image2);
-        }
     }
+
+    public Lanceiro(int x, int y, JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "src/ImagensInvertidas/Lanceiro.png", "src/ImagensInvertidas/Lanceiro_P.png", tabuleiro);
+    }
+
 
     public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {
         ArrayList<Coordenada> jogadasPossíveis = podeAndar();

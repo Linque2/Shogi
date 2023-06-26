@@ -18,9 +18,8 @@ public class Rei extends Peça{
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Rei(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI.getSimbolo(), ValorConj.REI.getValorConj(),Valor.REI.getValor(), capturada, false, "Images/Rei.png", "Images/Rei.png", tabuleiro);
-        
+    public Rei(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI.getSimbolo(), ValorConj.REI.getValorConj(),Valor.REI.getValor(), capturada, false, "src/Images/Rei.png", "src/Images/Rei.png", tabuleiro);
     }
 
     /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {

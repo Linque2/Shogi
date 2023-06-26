@@ -35,7 +35,7 @@ public class Tabuleiro implements Serializable {
     /**
      * @return  Gyokushou, o jogador equivalente as brancas no xadrez, o primeiro a fazer uma jogada
      */
-    public Jogador getGyokushou() {
+    public JogadorGyokushou getGyokushou() {
         return this.gyokushou;
     }
     
