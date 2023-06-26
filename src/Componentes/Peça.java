@@ -223,9 +223,9 @@ abstract public class Peça implements Serializable {
             return false;
     }
 
-    public Peça capturar(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+    public Peça capturar(Coordenada Pf, Tabuleiro tabuleiro) {
         Peça captura = tabuleiro.getGrid()[Pf.getC_x()][Pf.getC_y()];
-        if (!(andarPara(Pi, Pf, tabuleiro)))
+        if (!(andarPara(Pf, tabuleiro)))
             return null;
         if (captura != null && captura.getJogador() != getJogador()) {
             captura.getJogador().getPeçasTab().remove(captura);

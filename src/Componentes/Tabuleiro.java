@@ -6,56 +6,52 @@ import java.util.Random;
 public class Tabuleiro implements Serializable {
 	private static final long serialVersionUID = 144L;
 	private final long id = (new Random()).nextLong(); // Para encontrar o tabuleiro quando ele for salvo a um arquivo.
-    private Jogador sente;
-    private Jogador gote;
+    private JogadorOushou oushou;
+    private JogadorGyokushou gyokushou;
     private Peça[][] grid;
 
     /**
      * Construtor da classe tabuleiro
-     * @param sente No shogi, Sente é o primeiro jogador a fazer uma jogada, equivalente as brancas no xadrez, vencedor do furigoma
+     * @param gyokushou No shogi, Sente é o primeiro jogador a fazer uma jogada, equivalente as brancas no xadrez, vencedor do furigoma
      * @param gote No shogi, Gote é o segundo jogador a fazer uma jogada, equivalente as pretas no xadrez
      * @param grid Matriz que representa o conjunto de casas do tabuleiro, e guarda as peças, que estão nos elementos respectivos
      */
-    public Tabuleiro(Jogador sente, Jogador gote) {
-        this.sente = sente;
-        this.gote = gote;
+    public Tabuleiro(JogadorOushou oushou, JogadorGyokushou gyokushou) {
+        this.gyokushou = gyokushou;
+        this.oushou = oushou;
         this.grid = new Peça[9][9]; // No tabuleiro de Shogi a numeração é da direita para a esquerda, de cima para baixo. Logo,
+        furigoma(gyokushou, oushou);
         // as coordenadas não serão as mesmas da matriz.
     }
     
-    public Tabuleiro(JogadorOushou oushou, JogadorGyokushou gyokushou) {
-        this.grid = new Peça[9][9];
-        furigoma(gyokushou, oushou);
-    }
-    
     public Tabuleiro() { 
-    	this.sente = new JogadorGyokushou();
-    	this.gote = new JogadorOushou();
+    	this.gyokushou = new JogadorGyokushou();
+    	this.oushou = new JogadorOushou();
     	this.grid = new Peça[9][9];
     }
 
     //métodos de get e set
     
     /**
-     * @return  Sente, o jogador equivalente as brancas no xadrez, o primeiro a fazer uma jogada
+     * @return  Gyokushou, o jogador equivalente as brancas no xadrez, o primeiro a fazer uma jogada
      */
-    public Jogador getSente() {
-        return this.sente;
+    public Jogador getGyokushou() {
+        return this.gyokushou;
     }
     
-    public void setSente(Jogador jogador) {
-        this.sente = jogador;
+    public void setGyokushou(JogadorGyokushou gyokushou) {
+        this.gyokushou = gyokushou;
     }
 
     /**
-     * @return Gote, o jogador equivalente as pretas no xadrez, o segundo a jogar
+     * @return Oushou, o jogador equivalente as pretas no xadrez, o segundo a jogar
      */
-    public Jogador getGote() {
-        return this.gote;
+    public Jogador getOushou() {
+        return this.oushou;
     }
     
-    public void setGote(Jogador jogador) {
-    	this.gote = jogador;
+    public void setOushou(JogadorOushou oushou) {
+    	this.oushou = oushou;
     }
 
     /**
@@ -102,13 +98,9 @@ public class Tabuleiro implements Serializable {
         if (numCartasPadrao >= 3) {
             gyokushou.setEh_sente(false);
             oushou.setEh_sente(true);
-            setSente(oushou);
-            setGote(gyokushou);
         } else {
             gyokushou.setEh_sente(true);
             oushou.setEh_sente(false);
-            setSente(gyokushou);
-            setGote(oushou);
         }
     }
 

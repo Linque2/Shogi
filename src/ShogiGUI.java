@@ -28,7 +28,9 @@ public class ShogiGUI {
         frame = new JFrame("Shogi Game");
         boardPanel = new JPanel(new GridLayout(ROWS, COLS));
         cellPanels = new JPanel[ROWS][COLS];
-        Tabuleiro tabuleiro = new Tabuleiro(null, null);
+        JogadorOushou jogador = new JogadorOushou("Pedro", 21, true);
+        JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
+        Tabuleiro tabuleiro = new Tabuleiro(jogador, jogador2);
         tabuleiro.setGrid(new Peça[ROWS][COLS]);
 
         initializeBoard(tabuleiro);
@@ -55,31 +57,28 @@ public class ShogiGUI {
                 boardPanel.add(cellPanel);
             }
         }
-        //Instanciando um jogador exemplo
-        JogadorGyokushou jogador = new JogadorGyokushou("Pedro", 21, true);
-        //JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
         // Como as peças devem ser adicionadas:s
-        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
-        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
-        tabuleiro.getGrid()[8][2] = new Prata(8, 2, jogador, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][4] = new Rei(8,4, jogador, null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
-        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][6] = new Prata(8, 6, jogador, null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
-        tabuleiro.getGrid()[7][1] = new Bispo(7,1, jogador, null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
-        tabuleiro.getGrid()[7][7] = new Torre(7,7, jogador, null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
+        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
+        tabuleiro.getGrid()[8][2] = new Prata(8, 2, tabuleiro.getOushou(), null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][3] = new Ouro(8, 3, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][4] = new Rei(8,4, tabuleiro.getOushou(), null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Ouro(4, 4, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][6] = new Prata(8, 6, tabuleiro.getOushou(), null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][1] = new Bispo(7,1, tabuleiro.getOushou(), null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
+        tabuleiro.getGrid()[7][7] = new Torre(7,7, tabuleiro.getOushou(), null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
         for (int coluna=0; coluna<8; coluna++){
-            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, jogador, Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
+            tabuleiro.getGrid()[6][coluna] = new Peão(6, coluna, tabuleiro.getOushou(), Simbolo.PEAO_N.getSimbolo(), coluna, false, tabuleiro);
         }
 
         // ! TESTE
-        tabuleiro.getGrid()[4][4] = new Torre(4,4, jogador, null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
+        tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getGyokushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
         tabuleiro.getGrid()[4][4].promoverPeça();
-        tabuleiro.getGrid()[4][5] = new Peão(4, 5, jogador, Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
+        tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getGyokushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
         tabuleiro.getGrid()[4][5].promoverPeça();
-        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[2][7].promoverPeça();
         
         updateBoardUI(tabuleiro);
@@ -189,6 +188,14 @@ public class ShogiGUI {
 
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
                 if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
+    
+                    if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
+                        Peça captura;
+                        captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);
+                        // ! Fazer função para adicionar na mesa  visualmente
+                        //tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
+                        tabuleiro.getGrid()[row][col] = null;
+                    }
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
