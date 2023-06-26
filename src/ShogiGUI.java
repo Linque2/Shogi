@@ -58,7 +58,7 @@ public class ShogiGUI {
             }
         }
         // Como as peças devem ser adicionadas:s
-        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
+        tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 3, false, tabuleiro);
         tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
         tabuleiro.getGrid()[8][2] = new Prata(8, 2, tabuleiro.getOushou(), null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][3] = new Ouro(8, 3, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
@@ -74,10 +74,10 @@ public class ShogiGUI {
         }
 
         // ! TESTE
-        tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getGyokushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
-        tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getGyokushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getOushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
+        tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getOushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
         tabuleiro.getGrid()[4][5].promoverPeça();
-        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[2][7].promoverPeça();
         
         updateBoardUI(tabuleiro);
@@ -169,11 +169,10 @@ public class ShogiGUI {
             this.tabuleiro = tabuleiro;
         }
 
-        @Override
-        public void mouseClicked(MouseEvent event) {
+             public void mouseClicked(MouseEvent event) {
             //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
-                if (tabuleiro.getGrid()[row][col] != null) {
+                if ((selectedRow == -1 && selectedCol == -1) || (tabuleiro.getGrid()[row][col] != null) && tabuleiro.getGrid()[selectedRow][selectedCol].getJogador().equals(tabuleiro.getGrid()[row][col].getJogador())) {
                     selectedRow = row;
                     selectedCol = col;
                     cellPanels[row][col].setBackground(Color.YELLOW);
@@ -188,12 +187,13 @@ public class ShogiGUI {
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
                 if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
     
-                    /* if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
+                    if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
                         Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);;
                         // ! Fazer função para adicionar na mesa  visualmente
-                        //tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
+                        tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
+                        System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
-                    } */
+                    }
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
@@ -209,8 +209,6 @@ public class ShogiGUI {
                 selectedCol = -1;
             }
         }
-
-
     }
 
     private void highlightValidMoves(ArrayList<Coordenada> validMoves) {

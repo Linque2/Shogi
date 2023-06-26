@@ -46,7 +46,7 @@ public class Tabuleiro implements Serializable {
     /**
      * @return Oushou, o jogador equivalente as pretas no xadrez, o segundo a jogar
      */
-    public Jogador getOushou() {
+    public JogadorOushou getOushou() {
         return this.oushou;
     }
     

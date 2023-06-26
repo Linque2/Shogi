@@ -6,20 +6,11 @@ package Componentes;
 
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 
 public class Prata extends Peça {
 
-    public Prata(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "src/Images/Prata.png", "src/Images/Prata_P.png", tabuleiro);
-        if (jogador instanceof JogadorGyokushou) {
-            getListImageIcon().remove(0);
-            getListImageIcon().remove(1);
-            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Prata.png");
-            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Prata_P.png");
-            getListImageIcon().add(image1);
-            getListImageIcon().add(image2);
-        }
+    public Prata(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "Images/Prata.png", "Images/Prata_P.png", tabuleiro);
     };
 
     public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {

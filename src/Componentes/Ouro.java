@@ -17,16 +17,9 @@ public class Ouro extends Peça {
      * @param capturada "true" se a peça foi capturada e está no banco de peças,
      * "false" se a peça não foi capturada e está em jogo
      */
-    public Ouro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/Images/Ouro.png", "src/Images/Ouro.png", tabuleiro);
-        if (jogador instanceof JogadorGyokushou) {
-            getListImageIcon().remove(0);
-            getListImageIcon().remove(1);
-            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Ouro.png");
-            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Ouro_P.png");
-            getListImageIcon().add(image1);
-            getListImageIcon().add(image2);
-        }
+    public Ouro(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "Images/Ouro.png", "Images/Ouro.png", tabuleiro);
+       
     }
 
     // métodos de get e set

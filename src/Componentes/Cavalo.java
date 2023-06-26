@@ -10,16 +10,9 @@ import javax.swing.ImageIcon;
 
 public class Cavalo extends Peça{
 
-    public Cavalo(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-            super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj() ,Valor.CAVALO_N.getValor(), capturada, false, "src/Images/Cavalo.png", "src/Images/Cavalo_P.png", tabuleiro);
-            if (jogador instanceof JogadorGyokushou) {
-                getListImageIcon().remove(0);
-                getListImageIcon().remove(1);
-                ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Cavalo.png");
-                ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Cavalo_P.png");
-                getListImageIcon().add(image1);
-                getListImageIcon().add(image2);
-            }
+    public Cavalo(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
+            super(x, y, jogador, SimboloConj.CAVALO.getSimboloConj(), Simbolo.CAVALO_N.getSimbolo(), ValorConj.CAVALO.getValorConj() ,Valor.CAVALO_N.getValor(), capturada, false, "Images/Cavalo.png", "Images/Cavalo_P.png", tabuleiro);
+          
     }
 
     //métodos de get e set
