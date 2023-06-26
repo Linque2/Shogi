@@ -14,7 +14,7 @@ public class Cavalo extends Peça{
 
     //métodos de get e set
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+    /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)
@@ -37,7 +37,7 @@ public class Cavalo extends Peça{
                     return false;
         }
         return false;
-    }
+    } */
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();

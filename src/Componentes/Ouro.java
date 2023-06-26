@@ -27,14 +27,14 @@ public class Ouro extends Peça {
      * @return "true" caso a jogada seja possível, e translada a posição da peça para a nova posição
      * @return "false" caso a jogada seja impossível
      */
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+   /*  public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.OURO.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
             return true;
         } else
             return false;
-    }
+    } */
 
     @Override
     /**

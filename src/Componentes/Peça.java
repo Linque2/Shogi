@@ -214,6 +214,15 @@ abstract public class Peça implements Serializable {
         return null;
     }
 
+    public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {
+        ArrayList<Coordenada> jogadasPossíveis = podeAndar();
+            if (Pf.estaNaLista(jogadasPossíveis)) {
+            setCoordenada(Pf);
+            return true;
+        } else
+            return false;
+    }
+
     public Peça capturar(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Peça captura = tabuleiro.getGrid()[Pf.getC_x()][Pf.getC_y()];
         if (!(andarPara(Pi, Pf, tabuleiro)))
