@@ -118,6 +118,116 @@ public enum Movimento {
         SentidosFundamentais.SE.getSentidosFundamentais(),
         SentidosFundamentais.NO.getSentidosFundamentais(),
         SentidosFundamentais.SO.getSentidosFundamentais()
+    }), 
+    GyokuREI(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuREI_JOIA(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuOURO(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais(),
+    }),
+    GyokuPEAO_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais()
+    }),
+    GyokuLANCEIRO_N(new Coordenada[] {
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+    }),
+    GyokuCAVALO_N(new Coordenada[] {
+        SentidosFundamentais.L_NE.getSentidosFundamentais(),
+        SentidosFundamentais.L_NO.getSentidosFundamentais()
+    }),
+    GyokuPRATA_N(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
+    }),
+    GyokuBISPO_N(new Coordenada[] {
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
+    }),
+    GyokuTORRE_N(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais()
+    }),
+    //Peças promovidas
+    GyokuPEAO_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuLANCEIRO_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuCAVALO_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuPRATA_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais()
+    }),
+    GyokuBISPO_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
+    }),
+    GyokuTORRE_P(new Coordenada[] {
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
+        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.LESTE.getSentidosFundamentais(),
+        SentidosFundamentais.OESTE.getSentidosFundamentais(),
+        SentidosFundamentais.SE.getSentidosFundamentais(),
+        SentidosFundamentais.NE.getSentidosFundamentais(),
+        SentidosFundamentais.SO.getSentidosFundamentais(),
+        SentidosFundamentais.NO.getSentidosFundamentais()
     });
 
 
