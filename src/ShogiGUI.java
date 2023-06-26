@@ -169,17 +169,19 @@ public class ShogiGUI {
 
                     // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
                 ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
-                System.out.println(validMoves.toString());
                 highlightValidMoves(validMoves);
                 }
             } else {
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
-                if (isValidMove(selectedRow, selectedCol, row, col)) {
+                Coordenada coordenada_inicial = new Coordenada(selectedRow, selectedCol);
+                Coordenada coordenada_final = new Coordenada(row, col);
+                if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_inicial, coordenada_final, tabuleiro)) {
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
                     cellPanels[row][col].setBackground(LIGHT_COLOR);
-
+                    updateBoardUI(tabuleiro);
+                    clearHighlights();
                     selectedRow = -1;
                     selectedCol = -1;
                 } else {
@@ -188,10 +190,7 @@ public class ShogiGUI {
             }
         }
 
-        private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
-            // Lógica para verificar se a jogada é válida 
-            return true; // Temporariamente, retorna true para permitir qualquer movimento
-        }
+
     }
 
     private void highlightValidMoves(ArrayList<Coordenada> validMoves) {
