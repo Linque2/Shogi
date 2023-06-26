@@ -57,7 +57,7 @@ public class ShogiGUI {
         }
         //Instanciando um jogador exemplo
         JogadorGyokushou jogador = new JogadorGyokushou("Pedro", 21, true);
-        JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
+        //JogadorGyokushou jogador2 = new JogadorGyokushou("Rafael", 21, false);
         // Como as peças devem ser adicionadas:s
         tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 0, false, tabuleiro);
         tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, jogador, null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
@@ -173,7 +173,7 @@ public class ShogiGUI {
 
         @Override
         public void mouseClicked(MouseEvent event) {
-            if (selectedRow == -1 && selectedCol == -1) {
+            //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if (tabuleiro.getGrid()[row][col] != null) {
                     selectedRow = row;
@@ -184,22 +184,24 @@ public class ShogiGUI {
                 ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
                 highlightValidMoves(validMoves);
                 }
-            } else {
-                // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
-                Coordenada coordenada_inicial = new Coordenada(selectedRow, selectedCol);
+             else {
                 Coordenada coordenada_final = new Coordenada(row, col);
-                if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_inicial, coordenada_final, tabuleiro)) {
+
+                // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
+                if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
                     cellPanels[selectedRow][selectedCol].setBackground(LIGHT_COLOR);
                     cellPanels[row][col].setBackground(LIGHT_COLOR);
                     updateBoardUI(tabuleiro);
                     clearHighlights();
-                    selectedRow = -1;
-                    selectedCol = -1;
-                } else {
+                }
+
+                else {
                     JOptionPane.showMessageDialog(frame, "Jogada inválida!");
                 }
+                selectedRow = -1;
+                selectedCol = -1;
             }
         }
 
