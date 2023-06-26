@@ -59,5 +59,14 @@ public class ReiJoia extends Peça{
     public boolean despromoverPeça() {
         return false;
     }
+
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Rei_Joia.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Rei_Joia.png"));
+        }
+    } 
     
 }

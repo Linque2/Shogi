@@ -47,7 +47,16 @@ public class Ouro extends Peça {
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
-        for (Coordenada coordenada : Movimento.OURO.getMovimentos()) {
+
+        ArrayList<Coordenada> movimentos = new ArrayList<Coordenada>();
+        
+        if (getJogador() instanceof JogadorOushou) {
+            movimentos = Movimento.OURO.getMovimentos();
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            movimentos = Movimento.GyokuOURO.getMovimentos();
+        }
+        
+        for (Coordenada coordenada : movimentos) {
             Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
             if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                 if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
@@ -56,4 +65,13 @@ public class Ouro extends Peça {
 
         return jogadasPossíveis;
     }
+
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Ouro.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Ouro.png"));
+        }
+    } 
 }

@@ -60,6 +60,15 @@ public class Rei extends Peça{
         return false;
     }
 
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Rei.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Rei.png"));
+        }
+    } 
+
     
 
 }

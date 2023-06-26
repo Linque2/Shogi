@@ -35,9 +35,16 @@ public class Prata extends Peça {
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
-        if (getJogador() instanceof JogadorGyokushou)
-            
-        else if (getJogador() instanceof JogadorOushou)
+        ArrayList<Coordenada> movimentos = new ArrayList<Coordenada>();
+        ArrayList<Coordenada> movimentos_P = new ArrayList<Coordenada>();
+
+        if (getJogador() instanceof JogadorOushou) {
+            movimentos = Movimento.PRATA_N.getMovimentos();
+            movimentos_P = Movimento.PRATA_P.getMovimentos();
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            movimentos = Movimento.GyokuPRATA_N.getMovimentos();
+            movimentos_P = Movimento.GyokuPRATA_P.getMovimentos();
+        }
 
         int estaPromovida;
         if (getPromovida() == true)
@@ -47,7 +54,7 @@ public class Prata extends Peça {
 
         switch(estaPromovida){
             case 0: 
-                for (Coordenada coordenada : Movimento.PRATA_N.getMovimentos()) {
+                for (Coordenada coordenada : movimentos) {
                 Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
                     if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
@@ -56,7 +63,7 @@ public class Prata extends Peça {
 
                 return jogadasPossíveis;
             case 1: 
-                for (Coordenada coordenada : Movimento.PRATA_P.getMovimentos()) {
+                for (Coordenada coordenada : movimentos_P) {
                 Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
                     if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
@@ -67,4 +74,15 @@ public class Prata extends Peça {
         }
         return null;
     }
+
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Prata.png"));
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Prata_P.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Prata.png"));
+            getListImageIcon().add(new ImageIcon("src/Images/Prata_P.png"));
+        }
+    } 
 }

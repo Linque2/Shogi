@@ -77,7 +77,7 @@ public class ShogiGUI {
         tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getGyokushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
         tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getGyokushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
         tabuleiro.getGrid()[4][5].promoverPeça();
-        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7] = new Prata(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[2][7].promoverPeça();
         
         updateBoardUI(tabuleiro);
@@ -189,9 +189,20 @@ public class ShogiGUI {
                 if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
     
                     if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
-                        Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);;
-                        // ! Fazer função para adicionar na mesa  visualmente
-                        //tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
+                        Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);
+
+                        /* if (captura.getJogador() instanceof JogadorOushou) {
+                            JPanel bankPanel = painelBancoJogador[0];
+                            JLabel pieceLabel = new JLabel(captura.getListImageIcon().get(0));
+                            bankPanel.add(pieceLabel);
+                        }
+
+                        if (captura.getJogador() instanceof JogadorGyokushou) {
+                            JPanel bankPanel = painelBancoJogador[1];
+                            JLabel pieceLabel = new JLabel(captura.getListImageIcon().get(0));
+                            bankPanel.add(pieceLabel);
+                        } */
+                        
                         System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
                     }
