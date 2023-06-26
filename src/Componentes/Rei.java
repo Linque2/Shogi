@@ -21,14 +21,6 @@ public class Rei extends Peça{
      */
     public Rei(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
         super(x, y, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI.getSimbolo(), ValorConj.REI.getValorConj(),Valor.REI.getValor(), capturada, false, "src/Images/Rei.png", "src/Images/Rei.png", tabuleiro);
-        if (jogador instanceof JogadorGyokushou) {
-            getListImageIcon().remove(0);
-            getListImageIcon().remove(1);
-            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/Rei.png");
-            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/Rei_P.png");
-            getListImageIcon().add(image1);
-            getListImageIcon().add(image2);
-        }
     }
 
     /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {

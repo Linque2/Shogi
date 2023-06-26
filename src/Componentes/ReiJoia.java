@@ -19,15 +19,7 @@ public class ReiJoia extends Peça{
      * "false" se a peça não foi capturada e está em jogo
      */
     public ReiJoia(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false,"src/Images/ReiJoia.png", "src/Images/ReiJoia.png", tabuleiro);
-        if (jogador instanceof JogadorGyokushou) {
-            getListImageIcon().remove(0);
-            getListImageIcon().remove(1);
-            ImageIcon image1 = new ImageIcon("src/ImagensInvertidas/ReiJoia.png");
-            ImageIcon image2 = new ImageIcon("src/ImagensInvertidas/ReiJoia_P.png");
-            getListImageIcon().add(image1);
-            getListImageIcon().add(image2);
-        }
+        super(x, y, jogador, SimboloConj.REI_JOIA.getSimboloConj(), Simbolo.REI_JOIA.getSimbolo(), ValorConj.REI_JOIA.getValorConj(), Valor.REI_JOIA.getValor(), capturada, false,"src/ImagensInvertida/ReiJoia.png", "src/ImagensInvertida/ReiJoia.png", tabuleiro);
     }
 
     /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
