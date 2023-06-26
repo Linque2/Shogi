@@ -86,7 +86,8 @@ abstract public class Jogador implements Serializable {
         return true;
     }
 
-    public boolean colocarPeça() {
-        return true;
+    public Peça colocarPeça() {
+        Peça colocação;
+        return null;
     }
 }

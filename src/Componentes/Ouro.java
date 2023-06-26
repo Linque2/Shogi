@@ -16,7 +16,7 @@ public class Ouro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Ouro(int x, int y, Jogador jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "Images/Ouro.png", "Images/Ouro.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/Images/Ouro.png", "src/Images/Ouro.png", tabuleiro);
     }
 
     // métodos de get e set
@@ -55,8 +55,10 @@ public class Ouro extends Peça {
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
         for (Coordenada coordenada : Movimento.OURO.getMovimentos()) {
-            if (getTabuleiro().estaNoTabuleiro(Coordenada.transladarCoordenada(getCoordenada(), coordenada)))
-                jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
+            Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
+            if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
+                if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
+                    jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
         }
 
         return jogadasPossíveis;
