@@ -19,7 +19,7 @@ abstract public class Jogador implements Serializable {
      * @param nome Nome do jogador
      * @param score Numero de vitórias do jogador
      * @param eh_sente "true" se o jogador é Sente, "false" se o jogador é Gote
-     * No Shogi, o jogador Sente (de cor preta) joga primeiro e o jogador Gote (de cor branca) joga em seguida. Isso é definido pelo Furigoma
+     * No Shogi, o jogador Sente joga primeiro e o jogador Gote joga em seguida. Isso é definido pelo Furigoma
      * @param peçasTab Lista de peças que o jogador possui no tabuleiro
      * @param peçasBanco Lista de peças que o jogador possui no banco (capturadas)     
      */
@@ -86,13 +86,10 @@ abstract public class Jogador implements Serializable {
         return true;
     }
 
-    public boolean colocarPeça() {
-        return true;
-    }
-    
-    public String toString() {
-    	if (getEh_sente())
-    		return (getNome() + " - Score " + getScore() + " - Sente");
-    	return (getNome() + " - Score " + getScore() + " - Gote");
+    /**
+     * @return Lista de Coordenadas em que é possível colocar a peça
+     */
+    public ArrayList<Coordenada> colocarPeça(Tabuleiro tabuleiro, Peça peça) {
+        return null;
     }
 }
