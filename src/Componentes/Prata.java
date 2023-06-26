@@ -12,7 +12,7 @@ public class Prata extends Peça {
         super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "src/Images/Prata.png", "src/Images/Prata_P.png", tabuleiro);
     };
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+/*     public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)
@@ -35,7 +35,7 @@ public class Prata extends Peça {
                     return false;
         }
         return false;
-    }
+    } */
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();

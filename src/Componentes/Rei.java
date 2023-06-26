@@ -21,14 +21,14 @@ public class Rei extends Peça{
         super(x, y, jogador, SimboloConj.REI.getSimboloConj(), Simbolo.REI.getSimbolo(), ValorConj.REI.getValorConj(),Valor.REI.getValor(), capturada, false, "src/Images/Rei.png", "src/Images/Rei.png", tabuleiro);
     }
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+    /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         if (vetor.estaNaLista(Movimento.REI.getMovimentos())) {
             setCoordenada(Coordenada.transladarCoordenada(getCoordenada(), vetor));
             return true;
         } else
             return false;
-    }
+    } */
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();

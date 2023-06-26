@@ -11,7 +11,7 @@ public class Torre extends Peça{
         super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "src/Images/Torre.png", "src/Images/Torre_P.png", tabuleiro);
     };
 
-    public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
+    /* public boolean andarPara(Coordenada Pi, Coordenada Pf, Tabuleiro tabuleiro) {
         Coordenada vetor = Coordenada.calculaVetor(Pi, Pf);
         int estaPromovida;
         if (getPromovida() == true)
@@ -34,7 +34,7 @@ public class Torre extends Peça{
                     return false;
         }
         return false; 
-    }
+    } */
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
