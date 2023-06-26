@@ -64,6 +64,7 @@ public class Cavalo extends Peça{
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
                             jogadasPossíveis.add(Coordenada.transladarCoordenada(getCoordenada(), coordenada));
                 }
+
                 return jogadasPossíveis;
         }
         return null;

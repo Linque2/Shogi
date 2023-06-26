@@ -68,7 +68,6 @@ public class Bispo extends Peça {
             case 0: 
                 for (Coordenada vetor : Movimento.BISPO_N.getMovimentos()) {
                     Coordenada Pf = getCoordenada();
-                    System.out.println(Movimento.BISPO_N.getMovimentos());
                     peçaBloq = getTabuleiro().buscaPeça(vetor, getCoordenada());
                     if (peçaBloq == null) { // Caso não hajam peças no caminho 
                         while (getTabuleiro().estaNoTabuleiro(Pf)) {

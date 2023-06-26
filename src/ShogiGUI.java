@@ -77,9 +77,11 @@ public class ShogiGUI {
         // ! TESTE
         tabuleiro.getGrid()[4][4] = new Torre(4,4, jogador, null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
         tabuleiro.getGrid()[4][4].promoverPeça();
-        tabuleiro.getGrid()[4][5] = new Bispo(4,5, jogador, null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
-        tabuleiro.getGrid()[2][7] = new Torre(2, 7, jogador2, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
-
+        tabuleiro.getGrid()[4][5] = new Peão(4, 5, jogador, Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
+        tabuleiro.getGrid()[4][5].promoverPeça();
+        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, jogador, null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7].promoverPeça();
+        
         updateBoardUI(tabuleiro);
     }
 
@@ -114,12 +116,17 @@ public class ShogiGUI {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 JPanel cellPanel = cellPanels[row][col];
+                JLabel pieceLabel;
                 cellPanel.removeAll();
 
                 Peça peça = tabuleiro.getGrid()[row][col];
                 if (peça != null) {
                     //Seta a imagem da peça
-                    JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
+                    if (peça.getPromovida() == false) { // !fiz auterações na exibição dos ícones
+                        pieceLabel = new JLabel(peça.getListImageIcon().get(0)); 
+                    } else {
+                        pieceLabel = new JLabel(peça.getListImageIcon().get(1));
+                    }
                     pieceLabel.setHorizontalAlignment(SwingConstants.CENTER);
                     cellPanel.add(pieceLabel, BorderLayout.CENTER);
                 }
