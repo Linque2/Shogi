@@ -229,7 +229,7 @@ abstract public class Peça implements Serializable {
             captura.getJogador().getPeçasTab().remove(captura);
             captura.setJogador(getJogador());
             captura.atualizarImagem();
-            setCapturada(true);
+            captura.setCapturada(true);
             getJogador().getPeçasBanco().add(captura);
             if (captura.promovida)
                 captura.despromoverPeça();
@@ -239,4 +239,10 @@ abstract public class Peça implements Serializable {
     }
 
     public void atualizarImagem() {}
+
+    public String toString() {
+        return "Classe: " + getClass() + "Cpturada?: " + getCapturada();
+    }
 }
+
+    

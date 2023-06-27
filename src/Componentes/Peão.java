@@ -11,11 +11,11 @@ import javax.swing.ImageIcon;
 public class Peão extends Peça{
 
     public Peão(int x, int y, JogadorOushou jogador, char simbolo, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "Images/Peão.png", "Images/Peão_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "src/Images/Peão.png", "src/Images/Peão_P.png", tabuleiro);
     }
 
     public Peão(int x, int y, JogadorGyokushou jogador, char simbolo, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "ImagensInvertidas/Peão.png", "ImagensInvertidas/Peão_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.PEAO.getSimboloConj(),Simbolo.PEAO_N.getSimbolo(), ValorConj.PEAO.getValorConj(),Valor.PEAO_N.getValor(), capturada, false, "src/ImagensInvertidas/Peão.png", "src/ImagensInvertidas/Peão_P.png", tabuleiro);
     }
 
     // métodos de get e set
@@ -85,10 +85,9 @@ public class Peão extends Peça{
         if (getJogador() instanceof JogadorGyokushou) {
             getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Peão.png"));
             getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Peão_P.png"));
-        } else if (getJogador() instanceof JogadorGyokushou) {
+        } else if (getJogador() instanceof JogadorOushou) {
             getListImageIcon().add(new ImageIcon("src/Images/Peão.png"));
             getListImageIcon().add(new ImageIcon("src/Images/Peão_P.png"));
         }
-    }   
-
+    }    
 }

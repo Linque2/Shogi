@@ -19,11 +19,11 @@ public class Bispo extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Bispo(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "Images/Bispo.png", "Images/Bispo_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "src/Images/Bispo.png", "src/Images/Bispo_P.png", tabuleiro);
     }
 
     public Bispo(int x, int y, JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "ImagensInvertidas/Bispo.png", "ImagensInvertidas/Bispo_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.BISPO.getSimboloConj(), Simbolo.BISPO_N.getSimbolo(), ValorConj.BISPO.getValorConj() ,Valor.BISPO_N.getValor(), capturada, false, "src/ImagensInvertidas/Bispo.png", "src/ImagensInvertidas/Bispo_P.png", tabuleiro);
     }
 
     public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {
@@ -101,7 +101,7 @@ public class Bispo extends Peça {
         if (getJogador() instanceof JogadorGyokushou) {
             getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Bispo.png"));
             getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Bispo_P.png"));
-        } else if (getJogador() instanceof JogadorGyokushou) {
+        } else if (getJogador() instanceof JogadorOushou) {
             getListImageIcon().add(new ImageIcon("src/Images/Bispo.png"));
             getListImageIcon().add(new ImageIcon("src/Images/Bispo_P.png"));
         }

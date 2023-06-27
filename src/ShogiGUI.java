@@ -110,13 +110,30 @@ public class ShogiGUI {
             painelBancoJogadorScroll[player] = bankScrollPane;
         }
         //exemplo de uma peça no banco
-        for (int player = 0; player < NUM_PLAYERS; player++) {
+        /* for (int player = 0; player < NUM_PLAYERS; player++) {
             JPanel bankPanel = painelBancoJogador[player];
             Cavalo cavalo = new Cavalo(0, 0, tabuleiro.getGyokushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false, tabuleiro);
             JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
             pieceLabel.addMouseListener(new BancoClickListener(0,0,cavalo, bankPanel, tabuleiro));
-            bankPanel.add(pieceLabel);
+            bankPanel.add(pieceLabel); */
         }
+    
+
+    private void updateBancoUI(Tabuleiro tabuleiro, JPanel[] painelBancoJogador) {
+        painelBancoJogador[0].removeAll();
+        painelBancoJogador[1].removeAll();
+        JogadorOushou oushou = tabuleiro.getOushou();
+            for (Peça peça : oushou.getPeçasBanco()) {
+                JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
+                pieceLabel.addMouseListener(new BancoClickListener(0,0, peça, painelBancoJogador[1], tabuleiro));
+                painelBancoJogador[0].add(pieceLabel);
+            }
+        JogadorGyokushou gyokushou = tabuleiro.getGyokushou();
+            for (Peça peça : gyokushou.getPeçasBanco()) {
+                JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
+                pieceLabel.addMouseListener(new BancoClickListener(0,0, peça, painelBancoJogador[0], tabuleiro));
+                painelBancoJogador[1].add(pieceLabel);
+            }
     }
 
     private void updateBoardUI(Tabuleiro tabuleiro) {
@@ -167,6 +184,9 @@ public class ShogiGUI {
 
     }
 
+    /**
+     * Captura de click no banco
+     */
        private class BancoClickListener extends MouseAdapter {
         private int row;
         private int col;
@@ -185,7 +205,7 @@ public class ShogiGUI {
         @Override
         public void mouseClicked(MouseEvent event) {
             JLabel pieceLabel = (JLabel) event.getSource();
-            if (selectedRow == -1 && selectedCol == -1) {
+            if (selectedRow == -1 && selectedCol == -1 || (tabuleiro.getGrid()[row][col] != null) && tabuleiro.getGrid()[selectedRow][selectedCol].getJogador().equals(tabuleiro.getGrid()[row][col].getJogador())) {
                 // Se nenhuma peça estiver selecionada, seleciona a peça atual
                 selectedPiece = peça;
                 selectedRow = row;
@@ -195,23 +215,16 @@ public class ShogiGUI {
              else {
                 // Se uma peça já estiver selecionada, seleciona a célula do tabuleiro onde o usuário clicou
                 
-                    if (isValidMove(selectedPiece, row, col)) {
-                        Coordenada coordenada = new Coordenada(2, 2);
-                        System.out.println(coordenada.toString());
-                        peça = selectedPiece;
-                        peça.setCoordenada(coordenada);
-                        tabuleiro.getGrid()[coordenada.getC_x()][coordenada.getC_y()] = peça;
-                        selectedPiece = null;
-                        bankPanel.remove(pieceLabel);
-                        bankPanel.revalidate();
-                        bankPanel.repaint();
-                        updateBoardUI(tabuleiro);
-                        System.out.println(tabuleiro.getGrid()[coordenada.getC_x()][coordenada.getC_y()]);
-
-                    }
+                    
+                    
                 bankPanel.setBackground(null);
             }
             }
+
+            /* public Peça selectBancoUI(MouseEvent event) {
+                selectedCol 
+
+    } */
         
 
         /*  private int getClickedCellRow(MouseEvent event) {
@@ -221,16 +234,12 @@ public class ShogiGUI {
         private int getClickedCellCol(MouseEvent event) {
             return 0; // Número da coluna do banco de peças (se necessário)
         }*/
-
-        private boolean isValidMove(Peça piece, int row, int col) {
-            // Verifique se o movimento é válido para a peça selecionada
-            // Implemente a lógica de validação de acordo com as regras do Shogi
-            // Retorne true se o movimento for válido, caso contrário, retorne false
-            return true;
-        }
       } 
 
-    private class CellClickListener extends MouseAdapter {
+      /**
+       * Capturador de click para o tabuleiro
+       */
+      private class CellClickListener extends MouseAdapter {
         //Classe para definir a lógica quando o usuário clica nas peças e tenta realizar uma ação
         private int row;
         private int col;
@@ -254,18 +263,28 @@ public class ShogiGUI {
                 ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
                 highlightValidMoves(validMoves);
                 }
+                else if (selectedPiece != null && selectedPiece.getCapturada() == true) {
+                    selectedPiece.setCoordenada(new Coordenada(row, col));
+                    tabuleiro.getGrid()[row][col] = selectedPiece;
+                    System.out.println(selectedPiece + "AAAAAAAAAAAA");
+                    updateBoardUI(tabuleiro);
+                    updateBancoUI(tabuleiro, painelBancoJogador);
+                    clearHighlights();
+                }
              else {
                 Coordenada coordenada_final = new Coordenada(row, col);
 
                 // Se uma célula já estiver selecionada, move a peça para a nova célula se for uma jogada válida
                 if (tabuleiro.getGrid()[selectedRow][selectedCol].andarPara(coordenada_final, tabuleiro)) {
-    
+
+
                     if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
                         Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);
                         // ! Fazer função para adicionar na mesa  visualmente
                         tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                         System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
+                        updateBancoUI(tabuleiro, painelBancoJogador);
                     }
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
@@ -273,7 +292,8 @@ public class ShogiGUI {
                     cellPanels[row][col].setBackground(LIGHT_COLOR);
                     updateBoardUI(tabuleiro);
                     clearHighlights();
-                }
+                }   
+
 
                 else {
                     JOptionPane.showMessageDialog(frame, "Jogada inválida!");
