@@ -37,7 +37,7 @@ public class ShogiGUI {
 
         initializeBoard(tabuleiro);
         initializePainelBancoJogador(tabuleiro);
-
+        
         frame.setLayout(new BorderLayout());
         frame.add(boardPanel, BorderLayout.CENTER);
         frame.add(painelBancoJogadorScroll[0], BorderLayout.EAST);
@@ -275,13 +275,18 @@ public class ShogiGUI {
             //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if ((selectedRow == -1 && selectedCol == -1) || (tabuleiro.getGrid()[row][col] != null) && tabuleiro.getGrid()[selectedRow][selectedCol].getJogador().equals(tabuleiro.getGrid()[row][col].getJogador())) {
-                    selectedRow = row;
-                    selectedCol = col;
-                    cellPanels[row][col].setBackground(Color.YELLOW);
+                    System.out.println("DSGGSGEG");
+                    if(tabuleiro.getGrid()[row][col].getJogador().getEh_sente() == eh_sente){
+                         System.out.println("Capturou");
+                        selectedRow = row;
+                        selectedCol = col;
+                        cellPanels[row][col].setBackground(Color.YELLOW);
 
-                    // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
-                ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
-                highlightValidMoves(validMoves);
+                        // Obtém as coordenadas onde a movimentação é válida para a peça selecionada
+                    ArrayList<Coordenada> validMoves = tabuleiro.getGrid()[row][col].podeAndar();
+                    highlightValidMoves(validMoves);
+                    }
+            
                 }
                 else if (selectedPiece != null && selectedPiece.getCapturada() == true) {
                     selectedPiece.setCapturada(false);
@@ -295,6 +300,8 @@ public class ShogiGUI {
                     selectedCol = -1;
                     selectedRow = -1;
                     clearHighlights();
+                    eh_sente = !eh_sente;
+
                 }
              else {
                 Coordenada coordenada_final = new Coordenada(row, col);
@@ -310,6 +317,7 @@ public class ShogiGUI {
                         System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
                         updateBancoUI(tabuleiro, painelBancoJogador);
+
                     }
                     tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                     tabuleiro.getGrid()[selectedRow][selectedCol] = null;
@@ -317,6 +325,8 @@ public class ShogiGUI {
                     cellPanels[row][col].setBackground(LIGHT_COLOR);
                     updateBoardUI(tabuleiro);
                     clearHighlights();
+                    eh_sente = !eh_sente;
+
                 }   
 
 
@@ -343,7 +353,7 @@ public class ShogiGUI {
 
         // Adiciona o destaque nos quadrados válidos
         for (Coordenada move : validMoves) {
-            cellPanels[move.getC_x()][move.getC_y()].setBackground(Color.GREEN);
+            cellPanels[move.getC_x()][move.getC_y()].setBackground(new Color(177 , 147 , 105));
         }
     }
 
