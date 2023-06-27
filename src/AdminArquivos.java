@@ -130,29 +130,38 @@ public abstract class AdminArquivos {
     	return deletarTabuleiro("tab" + indiceMaisRecente + ".dat");
     }
     
-    public static int deletarTodosOsTabuleiros() {
-    	// Deleta o todos os arquivos dos tabuleiros. Devolve:
-    	// 1 se todos foram deletados;
-    	// -1 se pelo menos um arquivo existe mas não pôde ser deletado;
-    	// 0 se não há nenhum arquivo.
+    public static ArrayList<Integer> deletarTodosOsTabuleiros() {
+    	// Deleta o todos os arquivos dos tabuleiros. Devolve 
+    	// [# jogos deletados, # jogos não encontrados, # jogos não deletados].
+    	// Devolve null se não houver nenhum jogo salvo.
     	
-    	int resultado = 1;
+    	int deletados = 0; // Número de jogos deletados com sucesso.
+    	int naoEncontrados = 0; // Número de jogos cujos arquivos não foram encontrados.
     	
-    	// Deletar o mais recente:
-    	int deletarMaisRecente = deletarTabuleiroMaisRecente();
+    	// Pegar jogos salvos:
+    	ArrayList<Tabuleiro> salvos = lerTodosOsTabuleiros();
     	
-    	if (deletarMaisRecente == 0) // Não há nenhum tabuleiro salvo.
-    		return 0;
+    	if (salvos.size() == 0)
+    		return null;
     	
-    	if (deletarMaisRecente == -1) // O tabuleiro mais recente não pôde ser deletado. 
-    		resultado = -1;    	
+    	int nJogos = salvos.size();
     	
-    	// Deletar todos os outros:
-    	while (deletarMaisRecente != 0) {
-    		deletarMaisRecente = deletarTabuleiroMaisRecente();
+    	// Tentar deletar:
+    	for (int i = 0; i < nJogos; i++) {
+    		int deletar = deletarTabuleiro(salvos.get(0));
+    		
+    		if (deletar == 1)
+    			deletados++;
+    		else if (deletar == 0)
+    			naoEncontrados++;
     	}
     	
-    	return resultado;
+    	// Devolver o resultado:
+    	ArrayList<Integer> output = new ArrayList<Integer>();
+    	output.add(deletados);
+    	output.add(naoEncontrados);
+    	output.add(nJogos - deletados - naoEncontrados);
+    	return output;
     }
     
     // Auxiliares

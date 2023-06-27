@@ -119,7 +119,10 @@ public class Tabuleiro implements Serializable {
         }
         return null;
     }
-
+    
+    public String toString() {
+    	return ("ID " + getID() + " - Oushou: " + oushou.getNome() + " - Gyokushou: " + gyokushou.getNome());
+    }
 
     /**
      * Função para testes
