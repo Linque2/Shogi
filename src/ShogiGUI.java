@@ -133,9 +133,13 @@ public class ShogiGUI {
 }
 
 
-   private void updateBancoUI(Tabuleiro tabuleiro, JPanel[] painelBancoJogador) {
-        removerPecasDoBanco();
-        JogadorOushou oushou = tabuleiro.getOushou();
+    private void updateBancoUI(Tabuleiro tabuleiro, JPanel[] painelBancoJogador) {
+        painelBancoJogador[0].removeAll();
+        painelBancoJogador[0].revalidate();
+        painelBancoJogador[0].repaint();
+        painelBancoJogador[1].removeAll();
+        painelBancoJogador[1].revalidate();
+        painelBancoJogador[1].repaint();        JogadorOushou oushou = tabuleiro.getOushou();
         System.out.print("BBBBBBBBBBBBBBB");
             for (Peça peça : oushou.getPeçasBanco()) {
                 JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
@@ -280,6 +284,7 @@ public class ShogiGUI {
                 highlightValidMoves(validMoves);
                 }
                 else if (selectedPiece != null && selectedPiece.getCapturada() == true) {
+                    selectedPiece.setCapturada(false);
                     selectedPiece.getJogador().getPeçasBanco().remove(selectedPiece);
                     selectedPiece.setCoordenada(new Coordenada(row, col));
                     tabuleiro.getGrid()[row][col] = selectedPiece;
@@ -287,6 +292,8 @@ public class ShogiGUI {
                     updateBoardUI(tabuleiro);
                     updateBancoUI(tabuleiro, painelBancoJogador);
                     selectedPiece = null;
+                    selectedCol = -1;
+                    selectedRow = -1;
                     clearHighlights();
                 }
              else {
