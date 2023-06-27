@@ -77,10 +77,16 @@ public class Main {
         }
         
         public static void salvarJogo(Scanner scanner) {
+        	// Salva o jogo.
+        	
+        	// Listar todos os jogos para o usuário consultar o ID:
+        	if (!listarJogosSalvos()) // Não há nenhum jogo salvo.
+        		return;
+        	
         	// Pegar o jogo do terminal:
         	Tabuleiro jogo = getJogo(scanner);
         	
-        	if (jogo == null)
+        	if (jogo == null) // Jogo especificado não foi encontrado.
         		return;
         	
         	if (AdminArquivos.salvarTabuleiro(jogo))
