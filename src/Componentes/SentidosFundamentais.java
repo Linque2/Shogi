@@ -11,7 +11,9 @@ public enum SentidosFundamentais {
     NO(new Coordenada(-1, -1)),
     SO(new Coordenada(1, -1)),
     L_NE(new Coordenada(-2,1)),
-    L_NO(new Coordenada(-2, -1));
+    L_NO(new Coordenada(-2, -1)),
+    L_SE(new Coordenada(2,1)),
+    L_SO(new Coordenada(2,-1));
 
     private final Coordenada vetor;
 

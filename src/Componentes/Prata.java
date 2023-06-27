@@ -3,18 +3,18 @@
  */
 
 package Componentes;
-
+import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 
 public class Prata extends Peça {
 
     public Prata(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "src/Images/Prata.png", "src/Images/Prata_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "Images/Prata.png", "Images/Prata_P.png", tabuleiro);
     };
 
     public Prata(int x, int y, JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "src/ImagensInvertidas/Prata.png", "src/ImagensInvertidas/Prata_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.PRATA.getSimboloConj(), Simbolo.PRATA_N.getSimbolo() , ValorConj.PRATA.getValorConj() ,Valor.PRATA_N.getValor(), capturada, false, "ImagensInvertidas/Prata.png", "ImagensInvertidas/Prata_P.png", tabuleiro);
     };
 
     public boolean andarPara(Coordenada Pf, Tabuleiro tabuleiro) {

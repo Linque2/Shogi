@@ -148,14 +148,14 @@ public enum Movimento {
         SentidosFundamentais.SO.getSentidosFundamentais(),
     }),
     GyokuPEAO_N(new Coordenada[] {
-        SentidosFundamentais.NORTE.getSentidosFundamentais()
+        SentidosFundamentais.SUL.getSentidosFundamentais()
     }),
     GyokuLANCEIRO_N(new Coordenada[] {
-        SentidosFundamentais.NORTE.getSentidosFundamentais(),
+        SentidosFundamentais.SUL.getSentidosFundamentais(),
     }),
     GyokuCAVALO_N(new Coordenada[] {
-        SentidosFundamentais.L_NE.getSentidosFundamentais(),
-        SentidosFundamentais.L_NO.getSentidosFundamentais()
+        SentidosFundamentais.L_SE.getSentidosFundamentais(),
+        SentidosFundamentais.L_SO.getSentidosFundamentais()
     }),
     GyokuPRATA_N(new Coordenada[] {
         SentidosFundamentais.SUL.getSentidosFundamentais(),
