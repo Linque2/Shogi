@@ -10,11 +10,11 @@ import javax.swing.ImageIcon;
 public class Torre extends Peça{
 
     public Torre(int x, int y,JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "src/Images/Torre.png", "src/Images/Torre_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "Images/Torre.png", "Images/Torre_P.png", tabuleiro);
     };
 
     public Torre(int x, int y,JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "src/ImagensInvertidas/Torre.png", "src/ImagensInvertidas/Torre_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.TORRE.getSimboloConj(), Simbolo.TORRE_N.getSimbolo() , ValorConj.TORRE.getValorConj() ,Valor.TORRE_N.getValor(), capturada, false, "ImagensInvertidas/Torre.png", "ImagensInvertidas/Torre_P.png", tabuleiro);
     }
     
 

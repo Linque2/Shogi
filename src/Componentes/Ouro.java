@@ -18,11 +18,11 @@ public class Ouro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Ouro(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/Images/Ouro.png", "src/Images/Ouro.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "Images/Ouro.png", "Images/Ouro.png", tabuleiro);
     }
 
     public Ouro(int x, int y, JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo, Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "src/ImagensInvertidas/Ouro.png", "src/ImagensInvertidas/Ouro_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.OURO.getSimboloConj(), Simbolo.OURO.getSimbolo(), ValorConj.OURO.getValorConj(),Valor.OURO.getValor(), capturada, false, "magensInvertidas/Ouro.png", "ImagensInvertidas/Ouro_P.png", tabuleiro);
     }
 
     // métodos de get e set

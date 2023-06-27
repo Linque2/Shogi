@@ -21,6 +21,7 @@ public class ShogiGUI {
     private JPanel[] painelBancoJogador;
     private JScrollPane[] painelBancoJogadorScroll;
     private Peça selectedPiece;
+    private boolean eh_sente = true;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
@@ -118,11 +119,24 @@ public class ShogiGUI {
             bankPanel.add(pieceLabel); */
         }
     
+    private void removerPecasDoBanco() {
+    for (int player = 0; player < NUM_PLAYERS; player++) {
+        JPanel bankPanel = painelBancoJogador[player];
+        
+        // Remover todas as peças do banco
+        bankPanel.removeAll();
+        
+        // Atualizar o painel do banco
+        bankPanel.revalidate();
+        bankPanel.repaint();
+    }
+}
 
-    private void updateBancoUI(Tabuleiro tabuleiro, JPanel[] painelBancoJogador) {
-        painelBancoJogador[0].removeAll();
-        painelBancoJogador[1].removeAll();
+
+   private void updateBancoUI(Tabuleiro tabuleiro, JPanel[] painelBancoJogador) {
+        removerPecasDoBanco();
         JogadorOushou oushou = tabuleiro.getOushou();
+        System.out.print("BBBBBBBBBBBBBBB");
             for (Peça peça : oushou.getPeçasBanco()) {
                 JLabel pieceLabel = new JLabel(peça.getListImageIcon().get(0));
                 pieceLabel.addMouseListener(new BancoClickListener(0,0, peça, painelBancoJogador[1], tabuleiro));
@@ -250,8 +264,10 @@ public class ShogiGUI {
             this.col = col;
             this.tabuleiro = tabuleiro;
         }
-
-             public void mouseClicked(MouseEvent event) {
+            
+            public void mouseClicked(MouseEvent event) {
+                clearHighlights();
+                try{
             //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if ((selectedRow == -1 && selectedCol == -1) || (tabuleiro.getGrid()[row][col] != null) && tabuleiro.getGrid()[selectedRow][selectedCol].getJogador().equals(tabuleiro.getGrid()[row][col].getJogador())) {
@@ -264,11 +280,13 @@ public class ShogiGUI {
                 highlightValidMoves(validMoves);
                 }
                 else if (selectedPiece != null && selectedPiece.getCapturada() == true) {
+                    selectedPiece.getJogador().getPeçasBanco().remove(selectedPiece);
                     selectedPiece.setCoordenada(new Coordenada(row, col));
                     tabuleiro.getGrid()[row][col] = selectedPiece;
                     System.out.println(selectedPiece + "AAAAAAAAAAAA");
                     updateBoardUI(tabuleiro);
                     updateBancoUI(tabuleiro, painelBancoJogador);
+                    selectedPiece = null;
                     clearHighlights();
                 }
              else {
@@ -300,8 +318,16 @@ public class ShogiGUI {
                 }
                 selectedRow = -1;
                 selectedCol = -1;
+            }}
+
+            catch(NullPointerException e){
+                System.out.println("ASDASDASFF");
+                selectedRow = -1;
+                selectedCol = -1;
+
             }
         }
+        
     }
 
     private void highlightValidMoves(ArrayList<Coordenada> validMoves) {

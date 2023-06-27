@@ -19,11 +19,11 @@ public class Lanceiro extends Peça {
      * "false" se a peça não foi capturada e está em jogo
      */
     public Lanceiro(int x, int y, JogadorOushou jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "src/Images/Lanceiro.png", "src/Images/Lanceiro_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "Images/Lanceiro.png", "Images/Lanceiro_P.png", tabuleiro);
     }
 
     public Lanceiro(int x, int y, JogadorGyokushou jogador, Simbolo[] simbolos, char simbolo,Valor[] valores, int valor, boolean capturada, Tabuleiro tabuleiro) {
-        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "src/ImagensInvertidas/Lanceiro.png", "src/ImagensInvertidas/Lanceiro_P.png", tabuleiro);
+        super(x, y, jogador, SimboloConj.LANCEIRO.getSimboloConj(), Simbolo.LANCEIRO_N.getSimbolo(), ValorConj.LANCEIRO.getValorConj(), Valor.LANCEIRO_N.getValor(), capturada, false, "ImagensInvertidas/Lanceiro.png", "ImagensInvertidas/Lanceiro_P.png", tabuleiro);
     }
 
 
