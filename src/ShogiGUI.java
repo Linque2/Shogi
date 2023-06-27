@@ -20,6 +20,7 @@ public class ShogiGUI {
     private JPanel[][] cellPanels;
     private JPanel[] painelBancoJogador;
     private JScrollPane[] painelBancoJogadorScroll;
+    private Peça selectedPiece;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
@@ -59,13 +60,13 @@ public class ShogiGUI {
         }
         // Como as peças devem ser adicionadas:s
         tabuleiro.getGrid()[8][0] = new Lanceiro(8,0, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 3, false, tabuleiro);
-        tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
+        //tabuleiro.getGrid()[8][1] = new Cavalo(8, 1, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null,10 , false, tabuleiro);
         tabuleiro.getGrid()[8][2] = new Prata(8, 2, tabuleiro.getOushou(), null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][3] = new Ouro(8, 3, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][4] = new Rei(8,4, tabuleiro.getOushou(), null, Simbolo.REI.getSimbolo(), null, 8, false, tabuleiro);
         tabuleiro.getGrid()[4][4] = new Ouro(4, 4, tabuleiro.getOushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][6] = new Prata(8, 6, tabuleiro.getOushou(), null, Simbolo.PRATA_N.getSimbolo(), null, COLS, false, tabuleiro);
-        tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
+        //tabuleiro.getGrid()[8][7] = new Cavalo(8, 7, tabuleiro.getOushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[8][8] = new Lanceiro(8,8, tabuleiro.getOushou(), null, Simbolo.LANCEIRO_N.getSimbolo(), null, 4, false, tabuleiro);
         tabuleiro.getGrid()[7][1] = new Bispo(7,1, tabuleiro.getOushou(), null, Simbolo.BISPO_N.getSimbolo(), null, 4, false, tabuleiro);
         tabuleiro.getGrid()[7][7] = new Torre(7,7, tabuleiro.getOushou(), null, Simbolo.TORRE_N.getSimbolo(), null, COLS, false, tabuleiro);
@@ -74,10 +75,10 @@ public class ShogiGUI {
         }
 
         // ! TESTE
-        tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getOushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
-        tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getOushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
+        tabuleiro.getGrid()[4][4] = new Torre(4,4, tabuleiro.getGyokushou(), null, Simbolo.TORRE_P.getSimbolo(), null, 4, false, tabuleiro);            
+        tabuleiro.getGrid()[4][5] = new Peão(4, 5, tabuleiro.getGyokushou(), Simbolo.PEAO_N.getSimbolo(), 10, false, tabuleiro);
         tabuleiro.getGrid()[4][5].promoverPeça();
-        tabuleiro.getGrid()[2][7] = new Prata(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
+        tabuleiro.getGrid()[2][7] = new Lanceiro(2, 7, tabuleiro.getGyokushou(), null, Simbolo.OURO.getSimbolo(), null, COLS, false, tabuleiro);
         tabuleiro.getGrid()[2][7].promoverPeça();
         
         updateBoardUI(tabuleiro);
@@ -105,6 +106,7 @@ public class ShogiGUI {
             JPanel bankPanel = painelBancoJogador[player];
             Cavalo cavalo = new Cavalo(0, 0, tabuleiro.getGyokushou(), null, Simbolo.CAVALO_N.getSimbolo(), null, 0, false, tabuleiro);
             JLabel pieceLabel = new JLabel(cavalo.getListImageIcon().get(0));
+            pieceLabel.addMouseListener(new BancoClickListener(0,0,cavalo, bankPanel, tabuleiro));
             bankPanel.add(pieceLabel);
         }
     }
@@ -157,6 +159,69 @@ public class ShogiGUI {
 
     }
 
+       private class BancoClickListener extends MouseAdapter {
+        private int row;
+        private int col;
+        private Peça peça;
+        private JPanel bankPanel;
+        private Tabuleiro tabuleiro;
+
+        public BancoClickListener(int row, int col,Peça peça, JPanel bankPanel, Tabuleiro tabuleiro) {
+            this.row = row;
+            this.col = col;
+            this.peça = peça;
+            this.bankPanel = bankPanel;
+            this.tabuleiro = tabuleiro;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent event) {
+            JLabel pieceLabel = (JLabel) event.getSource();
+            if (selectedRow == -1 && selectedCol == -1) {
+                // Se nenhuma peça estiver selecionada, seleciona a peça atual
+                selectedPiece = peça;
+                selectedRow = row;
+                selectedCol = col;
+                pieceLabel.setBackground(Color.YELLOW);
+            }
+             else {
+                // Se uma peça já estiver selecionada, seleciona a célula do tabuleiro onde o usuário clicou
+                
+                    if (isValidMove(selectedPiece, row, col)) {
+                        Coordenada coordenada = new Coordenada(2, 2);
+                        System.out.println(coordenada.toString());
+                        peça = selectedPiece;
+                        peça.setCoordenada(coordenada);
+                        tabuleiro.getGrid()[coordenada.getC_x()][coordenada.getC_y()] = peça;
+                        selectedPiece = null;
+                        bankPanel.remove(pieceLabel);
+                        bankPanel.revalidate();
+                        bankPanel.repaint();
+                        updateBoardUI(tabuleiro);
+                        System.out.println(tabuleiro.getGrid()[coordenada.getC_x()][coordenada.getC_y()]);
+
+                    }
+                bankPanel.setBackground(null);
+            }
+            }
+        
+
+        /*  private int getClickedCellRow(MouseEvent event) {
+            return bankPanel.getComponentZOrder((Component) event.getSource());  // Linha modificada
+        }
+
+        private int getClickedCellCol(MouseEvent event) {
+            return 0; // Número da coluna do banco de peças (se necessário)
+        }*/
+
+        private boolean isValidMove(Peça piece, int row, int col) {
+            // Verifique se o movimento é válido para a peça selecionada
+            // Implemente a lógica de validação de acordo com as regras do Shogi
+            // Retorne true se o movimento for válido, caso contrário, retorne false
+            return true;
+        }
+      } 
+
     private class CellClickListener extends MouseAdapter {
         //Classe para definir a lógica quando o usuário clica nas peças e tenta realizar uma ação
         private int row;
@@ -189,19 +254,8 @@ public class ShogiGUI {
     
                     if (tabuleiro.getGrid()[row][col] != null && !(tabuleiro.getGrid()[row][col].getJogador().equals((tabuleiro.getGrid()[selectedRow][selectedCol]).getJogador()))) {
                         Peça captura = tabuleiro.getGrid()[selectedRow][selectedCol].capturar(coordenada_final, tabuleiro);
-
-                        /* if (captura.getJogador() instanceof JogadorOushou) {
-                            JPanel bankPanel = painelBancoJogador[0];
-                            JLabel pieceLabel = new JLabel(captura.getListImageIcon().get(0));
-                            bankPanel.add(pieceLabel);
-                        }
-
-                        if (captura.getJogador() instanceof JogadorGyokushou) {
-                            JPanel bankPanel = painelBancoJogador[1];
-                            JLabel pieceLabel = new JLabel(captura.getListImageIcon().get(0));
-                            bankPanel.add(pieceLabel);
-                        } */
-                        
+                        // ! Fazer função para adicionar na mesa  visualmente
+                        tabuleiro.getGrid()[row][col] = tabuleiro.getGrid()[selectedRow][selectedCol];
                         System.out.print(captura);
                         tabuleiro.getGrid()[captura.getCoordenada().getC_x()][captura.getCoordenada().getC_y()] = null;
                     }
