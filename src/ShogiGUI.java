@@ -264,11 +264,13 @@ public class ShogiGUI {
                 highlightValidMoves(validMoves);
                 }
                 else if (selectedPiece != null && selectedPiece.getCapturada() == true) {
+                    selectedPiece.getJogador().getPeçasBanco().remove(selectedPiece);
                     selectedPiece.setCoordenada(new Coordenada(row, col));
                     tabuleiro.getGrid()[row][col] = selectedPiece;
                     System.out.println(selectedPiece + "AAAAAAAAAAAA");
                     updateBoardUI(tabuleiro);
                     updateBancoUI(tabuleiro, painelBancoJogador);
+                    selectedPiece = null;
                     clearHighlights();
                 }
              else {
