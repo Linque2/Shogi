@@ -225,11 +225,11 @@ abstract public class Peça implements Serializable {
 
     public Peça capturar(Coordenada Pf, Tabuleiro tabuleiro) {
         Peça captura = tabuleiro.getGrid()[Pf.getC_x()][Pf.getC_y()];
-        if (!(andarPara(Pf, tabuleiro)))
-            return null;
         if (captura != null && !(captura.getJogador().equals(getJogador()))) {
             captura.getJogador().getPeçasTab().remove(captura);
             captura.setJogador(getJogador());
+            captura.atualizarImagem();
+            setCapturada(true);
             getJogador().getPeçasBanco().add(captura);
             if (captura.promovida)
                 captura.despromoverPeça();
@@ -237,4 +237,6 @@ abstract public class Peça implements Serializable {
         }
         return null;
     }
+
+    public void atualizarImagem() {}
 }

@@ -86,5 +86,16 @@ public class Torre extends Peça{
         }
         return null;
     }
+
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Torre.png"));
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Torre_P.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Torre.png"));
+            getListImageIcon().add(new ImageIcon("src/Images/Torre_P.png"));
+        }
+    } 
     
 }

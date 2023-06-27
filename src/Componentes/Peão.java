@@ -40,6 +40,17 @@ public class Peão extends Peça{
 
     public ArrayList<Coordenada> podeAndar() {
         ArrayList<Coordenada> jogadasPossíveis = new ArrayList<Coordenada>();
+        ArrayList<Coordenada> movimentos = new ArrayList<Coordenada>();
+        ArrayList<Coordenada> movimentos_P = new ArrayList<Coordenada>();
+    
+        if (getJogador() instanceof JogadorOushou) {
+            movimentos = Movimento.PEAO_N.getMovimentos();
+            movimentos_P = Movimento.PEAO_P.getMovimentos();
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            movimentos = Movimento.GyokuPEAO_N.getMovimentos();
+            movimentos_P = Movimento.GyokuPEAO_P.getMovimentos();
+        }
+
         int estaPromovida;
         if (getPromovida() == true)
             estaPromovida = 1;
@@ -48,7 +59,7 @@ public class Peão extends Peça{
 
         switch(estaPromovida){
             case 0: 
-                for (Coordenada coordenada : Movimento.PEAO_N.getMovimentos()) {
+                for (Coordenada coordenada : movimentos) {
                 Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
                     if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
@@ -57,7 +68,7 @@ public class Peão extends Peça{
 
                 return jogadasPossíveis;
             case 1: 
-                for (Coordenada coordenada : Movimento.PEAO_P.getMovimentos()) {
+                for (Coordenada coordenada : movimentos_P) {
                 Coordenada posiçãoFinal = Coordenada.transladarCoordenada(getCoordenada(), coordenada);
                     if (getTabuleiro().estaNoTabuleiro(posiçãoFinal))
                         if (!(getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()] != null && getTabuleiro().getGrid()[posiçãoFinal.getC_x()][posiçãoFinal.getC_y()].getJogador().equals(getJogador())))
@@ -68,5 +79,16 @@ public class Peão extends Peça{
         }
         return null;
     }
+
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Peão.png"));
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Peão_P.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Peão.png"));
+            getListImageIcon().add(new ImageIcon("src/Images/Peão_P.png"));
+        }
+    }   
 
 }

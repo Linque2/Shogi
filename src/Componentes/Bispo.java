@@ -6,6 +6,8 @@ package Componentes;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Bispo extends Peça {
     /**
      * Construtor da classe Ouro que herda de "Peça"
@@ -94,8 +96,16 @@ public class Bispo extends Peça {
         return null;
     }
 
-    
-    //métodos de get e set
+    public void atualizarImagem() {
+        getListImageIcon().clear();
+        if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Bispo.png"));
+            getListImageIcon().add(new ImageIcon("src/ImagensInvertidas/Bispo_P.png"));
+        } else if (getJogador() instanceof JogadorGyokushou) {
+            getListImageIcon().add(new ImageIcon("src/Images/Bispo.png"));
+            getListImageIcon().add(new ImageIcon("src/Images/Bispo_P.png"));
+        }
+    }
 
 
 }
