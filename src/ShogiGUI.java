@@ -47,6 +47,25 @@ public class ShogiGUI {
         frame.pack();
         frame.setVisible(true);
     }
+    
+    public ShogiGUI(Tabuleiro tabuleiro) {
+        frame = new JFrame("Shogi Game");
+        boardPanel = new JPanel(new GridLayout(ROWS, COLS));
+        cellPanels = new JPanel[ROWS][COLS];
+        tabuleiro.setGrid(new Peça[ROWS][COLS]);
+
+        initializeBoard(tabuleiro);
+        initializePainelBancoJogador(tabuleiro);
+        
+        frame.setLayout(new BorderLayout());
+        frame.add(boardPanel, BorderLayout.CENTER);
+        frame.add(painelBancoJogadorScroll[0], BorderLayout.EAST);
+        frame.add(painelBancoJogadorScroll[1], BorderLayout.WEST);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     private void initializeBoard(Tabuleiro tabuleiro) {
         for (int row = 0; row < ROWS; row++) {
