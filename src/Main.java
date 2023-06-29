@@ -2,9 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Componentes.*;
 
-public class Main {
-//	private static ArrayList<Tabuleiro> jogosAbertos;
-	
+public class Main {	
     public static void main(String[] args){  
     	ArrayList<Tabuleiro> jogosAbertos = new ArrayList<Tabuleiro>();
     	// Menu
