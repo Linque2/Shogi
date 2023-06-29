@@ -6,7 +6,7 @@ import Componentes.*;
 
 public enum MenuOperacoes {
     HOME("\n1 - Novo jogo\n2 - Listar jogos salvos\n3 - Salvar jogo\n4 - Sair"),
-
+    
     SALVOS("\n1 - Abrir um jogo\n2 - Deletar um jogo\n3 - Deletar todos os jogos\n4 - Voltar\n"),
 
     SAIR("");

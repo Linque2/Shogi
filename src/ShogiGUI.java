@@ -294,9 +294,9 @@ public class ShogiGUI {
             //if (selectedRow == -1 && selectedCol == -1) {
                 // Se nenhuma célula estiver selecionada, seleciona a célula atual
                 if ((selectedRow == -1 && selectedCol == -1) || (tabuleiro.getGrid()[row][col] != null) && tabuleiro.getGrid()[selectedRow][selectedCol].getJogador().equals(tabuleiro.getGrid()[row][col].getJogador())) {
-                    System.out.println("DSGGSGEG");
+                    // System.out.println("DSGGSGEG");
                     if(tabuleiro.getGrid()[row][col].getJogador().getEh_sente() == eh_sente){
-                         System.out.println("Capturou");
+                        //  System.out.println("Capturou");
                         selectedRow = row;
                         selectedCol = col;
                         cellPanels[row][col].setBackground(Color.YELLOW);
