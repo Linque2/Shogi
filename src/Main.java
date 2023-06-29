@@ -2,14 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Componentes.*;
 
-public class Main {	
-    public static void main(String[] args){   	
+public class Main {
+//	private static ArrayList<Tabuleiro> jogosAbertos;
+	
+    public static void main(String[] args){  
+    	ArrayList<Tabuleiro> jogosAbertos = new ArrayList<Tabuleiro>();
     	// Menu
-    	Menu.main(args);
+    	Menu.main(args, jogosAbertos);
     }
 
     public static class Menu {
-        public static void main(String[] args) {
+        public static void main(String[] args, ArrayList<Tabuleiro> jogosAbertos) {
             Scanner scanner = new Scanner(System.in);
             MenuOperacoes menu = MenuOperacoes.HOME;
 
@@ -25,9 +28,13 @@ public class Main {
                 if (input.isEmpty())
                 	System.out.println("Entrada inválida. Por favor selecione uma das opções listadas.");
                 else {
-                	int inputInt = Integer.valueOf(input);
-                	// Processar o input
-                	menu = menu.processarInput(inputInt, scanner);
+                	try {
+                		int inputInt = Integer.valueOf(input);
+                    	// Processar o input
+                    	menu = menu.processarInput(inputInt, scanner, jogosAbertos);
+                    } catch (NumberFormatException e) {
+                    	System.out.println("Entrada inválida. Por favor informe um valor numérico.");
+                    }
                 }
             }
 
@@ -47,7 +54,7 @@ public class Main {
         	AdminArquivos.salvarTabuleiro(novoTabuleiro);
         	
         	// Mostrar o novo tabuleiro na GUI.
-        	System.out.println("*** MOSTRAR JOGO NA GUI ***");
+			ShogiGUI gui = new ShogiGUI(novoTabuleiro);
         }
         
         public static boolean listarJogosSalvos() {
@@ -66,25 +73,33 @@ public class Main {
         	}
         }
         
-        public static void abrirJogo(Scanner scanner) {
+        public static void abrirJogo(Scanner scanner, ArrayList<Tabuleiro> jogosAbertos) {
         	// Pegar jogo do terminal:
-        	Tabuleiro jogo = getJogo(scanner);
+        	Tabuleiro jogo = getJogoSalvo(scanner);
         	
         	if (jogo == null)
         		return;
         	
-        	// Abrir jogo no GUI.
-        }
+        	// Abrir jogo na GUI.
+        	jogosAbertos.add(jogo);
+			ShogiGUI gui = new ShogiGUI(jogo);
+		}
         
-        public static void salvarJogo(Scanner scanner) {
+        public static void salvarJogo(Scanner scanner, ArrayList<Tabuleiro> jogosAbertos) {
         	// Salva o jogo.
         	
-        	// Listar todos os jogos para o usuário consultar o ID:
-        	if (!listarJogosSalvos()) // Não há nenhum jogo salvo.
+        	if (jogosAbertos.size() == 0) {
+        		System.out.println("Nenhum jogo está aberto.");
         		return;
+        	}
         	
-        	// Pegar o jogo do terminal:
-        	Tabuleiro jogo = getJogo(scanner);
+        	// Listar todos os jogos para o usuário consultar o ID:
+        	for (Tabuleiro jogo : jogosAbertos) {
+        		System.out.println(jogo);
+        	}
+        	
+        	// Pegar a ID do jogo do terminal:
+        	Tabuleiro jogo = getJogoAberto(scanner, jogosAbertos);
         	
         	if (jogo == null) // Jogo especificado não foi encontrado.
         		return;
@@ -97,7 +112,7 @@ public class Main {
         
         public static void deletarJogo(Scanner scanner) {
         	// Pegar jogo do terminal:
-        	Tabuleiro jogo = getJogo(scanner);
+        	Tabuleiro jogo = getJogoSalvo(scanner);
         	int deletar = AdminArquivos.deletarTabuleiro(jogo);
         	
         	if (deletar == 1)
@@ -130,7 +145,7 @@ public class Main {
         			resultado.get(0), nJogos, resultado.get(1), nJogos, resultado.get(2), nJogos));
         }
         
-        private static Tabuleiro getJogo(Scanner scanner) {
+        private static Tabuleiro getJogo(Scanner scanner, ArrayList<Tabuleiro> listaJogos) {
         	// Pega um jogo do terminal. Retorna null se a id fornecida não for um long
         	// ou se nenhum jogo tiver a id fornecida.
         	long id = getID(scanner);
@@ -138,20 +153,28 @@ public class Main {
         	if (id == -1)
         		return null;
         	
-        	// Procurar jogo com a id fornecida:
-        	ArrayList<Tabuleiro> jogosSalvos = AdminArquivos.lerTodosOsTabuleiros();
-        	
-        	for (Tabuleiro jogo : jogosSalvos)
+        	// Procurar jogo com a id fornecida:        	
+        	for (Tabuleiro jogo : listaJogos)
         		if (jogo.getID() == id)
         			return jogo;
         	return null;
+        }
+        
+        private static Tabuleiro getJogoSalvo(Scanner scanner) {
+        	// Pega um tabuleiro da lista de jogos salvos
+        	return getJogo(scanner, AdminArquivos.lerTodosOsTabuleiros());
+        }
+        
+        private static Tabuleiro getJogoAberto(Scanner scanner, ArrayList<Tabuleiro> jogosAbertos) {
+        	// Pega um tabuleiro da lista de jogos abertos
+        	return getJogo(scanner, jogosAbertos);
         }
         
         private static long getID(Scanner scanner) {
         	// Pega uma long do terminal. Se a entrada for inválida, retorna -1;
         	
         	System.out.println("Digite a ID do jogo:");
-        	String entrada = scanner.next();
+        	String entrada = scanner.nextLine();
             long id = -1;
             
             try {
@@ -195,5 +218,11 @@ public class Main {
         	JogadorGyokushou gyokushou = new JogadorGyokushou(nome, 0, false);
         	return gyokushou;
         }
+        
+//        private static void listarJogosAbertos() {
+//        	for (Tabuleiro jogo : jogosAbertos) {
+//        		System.out.println(jogo);
+//        	}
+//        }
     }
 }

@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Tabuleiro implements Serializable {
 	private static final long serialVersionUID = 144L;
-	private final long id = (new Random()).nextLong(); // Para encontrar o tabuleiro quando ele for salvo a um arquivo.
+	private final long id = Math.abs((new Random()).nextLong()); // Para encontrar o tabuleiro quando ele for salvo a um arquivo.
     private JogadorOushou oushou;
     private JogadorGyokushou gyokushou;
     private Peça[][] grid;
@@ -120,6 +120,7 @@ public class Tabuleiro implements Serializable {
         return null;
     }
     
+    @Override
     public String toString() {
     	return ("ID " + getID() + " - Oushou: " + oushou.getNome() + " - Gyokushou: " + gyokushou.getNome());
     }

@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import Componentes.*;
 
 public enum MenuOperacoes {
     HOME("\n1 - Novo jogo\n2 - Listar jogos salvos\n3 - Salvar jogo\n4 - Sair"),
@@ -19,7 +21,7 @@ public enum MenuOperacoes {
         return texto;
     }
 
-    public MenuOperacoes processarInput(int input, Scanner scanner) {
+    public MenuOperacoes processarInput(int input, Scanner scanner, ArrayList<Tabuleiro> jogosAbertos) {
         switch (this) {
             case HOME:
                 switch (input) {
@@ -31,7 +33,8 @@ public enum MenuOperacoes {
                     		return SALVOS;
                         return HOME;
                     case 3: // Salvar jogo
-                    	Main.Menu.salvarJogo(scanner);
+                    	Main.Menu.salvarJogo(scanner, jogosAbertos);
+                    	return HOME;
                     case 4: // Voltar
                     	return SAIR;
                     default:
@@ -40,7 +43,7 @@ public enum MenuOperacoes {
             case SALVOS:
                 switch (input) {
                     case 1: // Abrir um jogo
-                    	Main.Menu.abrirJogo(scanner);
+                    	Main.Menu.abrirJogo(scanner, jogosAbertos);
                         return HOME;
                     case 2: // Deletar um jogo
                     	Main.Menu.deletarJogo(scanner);
