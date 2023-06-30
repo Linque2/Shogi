@@ -17,7 +17,7 @@ Em nosso projeto nos dedicamos a implementar uma versão funcional do jogo, e qu
 
 O UML do nosso código pode ser acessado neste clicando neste link:
 
-<link href = "https://github.com/Linque2/Shogi/blob/main/UML.png"> UML </link>
+<a href = "https://github.com/Linque2/Shogi/blob/main/UML.png"> UML </a>
 
 E uma explicação mais aprofundada e demosntração do programa pode ser vista no vídeo seguinte:
 <video>
