@@ -16,8 +16,8 @@ Em sua forma mais clássica as partidas são jogadas em tabuleiro com uma grade 
 Em nosso projeto nos dedicamos a implementar uma versão funcional do jogo, e que atendece a alguns conceitos fundamentais do paradigma de orientação a objetos, estruturas polimorficas, herança e relacionamentos, além de outros conceitos como escrita e leitura de arquivos, tratamento de excessões e desenvolvimento de interfaces gráficas, que também foram exploradas no desenvolvimento.
 
 O UML do nosso código pode ser acessado neste clicando neste link:
-<link href = "https://github.com/Linque2/Shogi/blob/main/UML.png">
-UML
- <link>
+
+<link href = "https://github.com/Linque2/Shogi/blob/main/UML.png"> UML </link>
+
 E uma explicação mais aprofundada e demosntração do programa pode ser vista no vídeo seguinte:
 <video>
