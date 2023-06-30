@@ -20,4 +20,6 @@ O UML do nosso código pode ser acessado neste clicando neste link:
 <a href = "https://github.com/Linque2/Shogi/blob/main/UML.png"> UML </a>
 
 E uma demosntração do programa pode ser vista no vídeo seguinte:
-<video>
+
+<a href = "https://clipchamp.com/watch/45pv7qRS8MD"> VÍDEO </a>
+
